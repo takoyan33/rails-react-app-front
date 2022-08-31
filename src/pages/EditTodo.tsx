@@ -50,7 +50,7 @@ const DeleteButton = styled.button`
   cursor: pointer;
 `;
 
-function EditTodo(props) {
+function EditTodo(props: any) {
   const initialTodoState = {
     id: null,
     name: "",
@@ -60,12 +60,12 @@ function EditTodo(props) {
   const [currentTodo, setCurrentTodo] = useState(initialTodoState);
   const navigate = useNavigate();
 
-  let { id } = useParams();
-  console.log({ id });
+  let id = useParams<{ id: string }>();
+  console.log(id);
 
-  const getTodo = ({ id }) => {
+  const getTodo = (id: { id: Readonly<Partial<{ id: string }>> }) => {
     axios
-      .get(`http://localhost:3001/api/v1/todos/${id}`)
+      .get(`http://localhost:3000/api/v1/todos/${id}`)
       .then((resp) => {
         setCurrentTodo(resp.data);
       })
@@ -78,20 +78,20 @@ function EditTodo(props) {
     getTodo({ id });
   }, []);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: any) => {
     const { name, value } = event.target;
     setCurrentTodo({ ...currentTodo, [name]: value });
     //currenttodoのnameをセットする
   };
 
-  const updateIsCompleted = (val) => {
+  const updateIsCompleted = (val: any) => {
     var data = {
       id: val.id,
       name: val.name,
       is_completed: !val.is_completed,
     };
     axios
-      .patch(`http://localhost:3001/api/v1/todos/${val.id}`, data)
+      .patch(`http://localhost:3000/api/v1/todos/${val.id}`, data)
       .then((resp) => {
         alert("更新しました");
         setCurrentTodo(resp.data);

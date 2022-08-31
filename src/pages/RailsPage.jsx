@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import EditTodo from "../components/EditTodo";
+import EditTodo from "./EditTodo";
 
 const SearchAndButtton = styled.div`
   display: flex;

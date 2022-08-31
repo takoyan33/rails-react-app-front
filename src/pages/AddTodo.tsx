@@ -45,7 +45,7 @@ const Icon = styled.span`
 
 // toast.configure();
 
-function AddTodo(props) {
+function AddTodo(props: any) {
   const initialTodoState = {
     id: null,
     name: "",
@@ -57,7 +57,7 @@ function AddTodo(props) {
   const [todo, setTodo] = useState(initialTodoState);
   const navigate = useNavigate();
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: any) => {
     const { name, value } = event.target;
     setTodo({ ...todo, [name]: value });
   };
