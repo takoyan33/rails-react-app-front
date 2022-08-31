@@ -6,7 +6,7 @@ const IndexPage: React.FC = () => {
   return (
     <>
       <Header />
-      <h1 className="">API図鑑</h1>
+      <h1 className="text-3xl font-bold">API図鑑</h1>
       <p className="">API図鑑では、APIを用いたアプケーションを紹介します。</p>
       <button>
         <Link to="todos">RailsAPI</Link>
