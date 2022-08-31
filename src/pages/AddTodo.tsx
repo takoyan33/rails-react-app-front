@@ -56,6 +56,7 @@ function AddTodo(props: any) {
 
   const [todo, setTodo] = useState(initialTodoState);
   const navigate = useNavigate();
+  const railsurl = "https://rails-react-app-backend.herokuapp.com/api/v1/todos";
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -68,12 +69,12 @@ function AddTodo(props: any) {
     };
 
     axios
-      .post("http://localhost:3001/api/v1/todos", data)
+      .post(railsurl, data)
       .then((resp) => {
         setTodo({
           id: resp.data.id,
           name: resp.data.name,
-          is_completed: resp.data.is_completed,
+          is_completed: resp.data.is_compleated,
         });
         alert("追加しました");
         navigate("/todos");
