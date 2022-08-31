@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+type Data = {
+  prefCode: string;
+  prefName: string;
+};
+
 const Resas = () => {
   const [resass, setResas] = useState([]);
   const [loading, setLoading] = useState(true);
