@@ -14,6 +14,11 @@ const IndexPage: React.FC = () => {
       <br></br>
       <br></br>
       <button>
+        <Link to="todos/new">TODO作成RAIlsAPI</Link>
+      </button>
+      <br></br>
+      <br></br>
+      <button>
         <Link to="qiita">QiitaAPI</Link>
       </button>
       <br></br>
