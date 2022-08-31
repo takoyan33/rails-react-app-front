@@ -7,7 +7,7 @@ import QiitapracticePage from "./pages/QiitapracticePage";
 // import AddTodo from "./components/AddTodo";
 import Error from "./components/Error";
 import Dark from "./components/Darkmode";
-// import Resas from "./pages/ResasPage";
+import Resas from "./pages/ResasPage";
 
 const Routers = () => {
   return (
@@ -21,7 +21,7 @@ const Routers = () => {
         <Route path="/qiitapractice" element={<QiitapracticePage />} />
         <Route path="*" element={<Error />} />
         <Route path="/dark" element={<Dark />} />
-        {/* <Route path="/resas" element={<Resas />} /> */}
+        <Route path="/resas" element={<Resas />} />
       </Routes>
     </BrowserRouter>
   );

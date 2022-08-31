@@ -7,7 +7,6 @@ const Resas = () => {
   const resassurl = "https://opendata.resas-portal.go.jp/api/v1";
 
   useEffect(() => {
-
     // 都道府県一覧を取得する
     axios
       .get(`${resassurl}/prefectures`, {
@@ -22,16 +21,14 @@ const Resas = () => {
 
   console.log(resass);
 
-  
-
   return (
     <>
       <h2>Resas</h2>
       <p>県の名前</p>
       {loading == true && <p>loding中です。</p>}
 
-      {resass.map((el) => (
-        <li key={el.prefCode}> {el.prefName} </li>
+      {resass.map((data: Data) => (
+        <li key={data.prefCode}> {data.prefName} </li>
       ))}
     </>
   );
