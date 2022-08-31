@@ -14,6 +14,7 @@
     "@material-ui/styles": "^4.11.5",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.3",
+    "@types/styled-components": "^5.1.26",
     "antd": "^4.22.8",
     "axios": "^0.27.2",
     "react": "^18.2.0",
