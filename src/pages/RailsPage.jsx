@@ -79,7 +79,7 @@ const RailsPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/v1/todos.json")
+      .get("http://localhost:4000/api/v1/todos.json")
       .then((resp) => {
         console.log(resp.data);
         setTodos(resp.data);
@@ -94,7 +94,7 @@ const RailsPage = () => {
     //確認box
     if (sure) {
       axios
-        .delete("http://localhost:3001/api/v1/todos/destroy_all")
+        .delete("http://localhost:4000/api/v1/todos/destroy_all")
         .then((resp) => {
           setTodos([]);
           //空の配列にする
@@ -114,7 +114,7 @@ const RailsPage = () => {
       //値が反転する true→false
     };
     axios
-      .patch(`http://localhost:3001/api/v1/todos/${val.id}`, data)
+      .patch(`http://localhost:4000/api/v1/todos/${val.id}`, data)
       .then((resp) => {
         const newTodos = [...todos];
         //スプレッド構文で開ける

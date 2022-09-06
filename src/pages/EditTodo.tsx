@@ -91,7 +91,7 @@ function EditTodo(props: any) {
       is_completed: !val.is_completed,
     };
     axios
-      .patch(`http://localhost:3000/api/v1/todos/${val.id}`, data)
+      .patch(`http://localhost:4000/api/v1/todos/${val.id}`, data)
       .then((resp) => {
         alert("更新しました");
         setCurrentTodo(resp.data);
@@ -101,7 +101,7 @@ function EditTodo(props: any) {
   const updateTodo = () => {
     axios
       .patch(
-        `http://localhost:3001/api/v1/todos/${currentTodo.id}`,
+        `http://localhost:4000/api/v1/todos/${currentTodo.id}`,
         currentTodo
       )
       .then((response) => {
@@ -117,7 +117,7 @@ function EditTodo(props: any) {
     const sure = window.confirm("削除しても大丈夫ですか?");
     if (sure) {
       axios
-        .delete(`http://localhost:3001/api/v1/todos/${currentTodo.id}`)
+        .delete(`http://localhost:4000/api/v1/todos/${currentTodo.id}`)
         .then((resp) => {
           console.log(resp.data);
           alert("削除しました");

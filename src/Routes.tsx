@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import IndexPage from "./pages/IndexPage";
 import QiitaPage from "./pages/QiitaPage";
-// import RailsPage from "./pages/RailsPage.jsx";
+import RailsPage from "./pages/RailsPage";
 import QiitapracticePage from "./pages/QiitapracticePage";
 import EditTodo from "./pages/EditTodo";
 import AddTodo from "./pages/AddTodo";
@@ -15,7 +15,7 @@ const Routers = () => {
       <Routes>
         <Route path="/" element={<IndexPage />} />
         <Route path="/qiita" element={<QiitaPage />} />
-        {/* <Route path="/todos" element={<RailsPage />} /> */}
+        <Route path="/todos" element={<RailsPage />} />
         <Route path="/todos/:id/edit" element={<EditTodo />} />
         <Route path="/todos/new" element={<AddTodo />} />
         <Route path="/qiitapractice" element={<QiitapracticePage />} />
