@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import Dark from "../components/Darkmode";
 
 const IndexPage: React.FC = () => {
   return (
     <>
       <Header />
-      <h1 className="text-3xl font-bold">API図鑑</h1>
+      <Dark />
+      <h2 className="text-3xl font-bold">API図鑑</h2>
       <p className="">API図鑑では、APIを用いたアプケーションを紹介します。</p>
+      <br></br>
       <button>
         <Link to="todos">RailsAPI</Link>
       </button>
