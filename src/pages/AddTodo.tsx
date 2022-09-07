@@ -85,8 +85,8 @@ function AddTodo(props: any) {
   };
 
   return (
-    <>
-      <h1>New Todo</h1>
+    <div className="max-w-5xl m-auto">
+      <p className="text-3xl font-bold">新しいTodo</p>
       <InputAndButton>
         <InputName
           type="text"
@@ -104,7 +104,7 @@ function AddTodo(props: any) {
           </Icon>
         </Button>
       </InputAndButton>
-    </>
+    </div>
   );
 }
 

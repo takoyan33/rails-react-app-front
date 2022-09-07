@@ -27,15 +27,15 @@ const Resas = () => {
   console.log(resass);
 
   return (
-    <>
-      <h2>Resas</h2>
+    <div className="max-w-5xl m-auto">
+      <h2>Resas API</h2>
       <p>県の名前</p>
-      {loading == true && <p>loding中です。</p>}
+      {loading == true && <p>loading中です。</p>}
 
       {resass.map((data: Data) => (
         <li key={data.prefCode}> {data.prefName} </li>
       ))}
-    </>
+    </div>
   );
 };
 export default Resas;

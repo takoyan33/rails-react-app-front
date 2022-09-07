@@ -34,12 +34,12 @@ export default function Darkmode() {
         {darkMode ? (
           <IconButton color="inherit" onClick={handleDarkModeOff}>
             <Brightness7Icon />
-            ホワイトモードに切り替える
+            <p>ホワイトモードに切り替える</p>
           </IconButton>
         ) : (
           <IconButton color="inherit" onClick={handleDarkModeOn}>
             <Brightness4Icon />
-            ダークモードに切り替える
+            <p>ダークモードに切り替える</p>
           </IconButton>
         )}
       </div>

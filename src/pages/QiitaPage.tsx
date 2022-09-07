@@ -8,9 +8,9 @@ const QiitaPage: React.FC = () => {
   const { articles, searchWord, errorMessage, isLoading, fetchArticles } =
     useListQiitaArticles();
   return (
-    <>
+    <div className="max-w-5xl m-auto">
       <Header />
-      <h1>Qiita</h1>
+      <p className="text-3xl font-bold">Qiita</p>
       <p>QiitaAPIを用いたTODOアプリです。</p>
 
       <SearchForm fetchArticles={fetchArticles} />
@@ -20,7 +20,7 @@ const QiitaPage: React.FC = () => {
         errorMessage={errorMessage}
         isLoading={isLoading}
       />
-    </>
+    </div>
   );
 };
 

@@ -130,8 +130,8 @@ function EditTodo(props: any) {
   };
 
   return (
-    <>
-      <h1>Todoを編集する</h1>
+    <div className="max-w-5xl m-auto">
+      <p className="text-3xl font-bold">Todoを編集する</p>
       <div>
         <div>
           <label htmlFor="name">現在の名前</label>
@@ -173,7 +173,7 @@ function EditTodo(props: any) {
           削除
         </DeleteButton>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -7,9 +7,9 @@ const QiitapracticePage: React.FC = () => {
   const { articles, errorMessage, isLoading, fetchArticles } = practiceqiita();
 
   return (
-    <>
+    <div className="max-w-5xl m-auto">
       <Header />
-      <h1>Qiita</h1>
+      <p className="text-3xl font-bold">Qiita</p>
       <p>Qiita記事を50件　Reactで表示する</p>
 
       <button onClick={fetchArticles}>表示する</button>
@@ -19,7 +19,7 @@ const QiitapracticePage: React.FC = () => {
         errorMessage={errorMessage}
         isLoading={isLoading}
       />
-    </>
+    </div>
   );
 };
 

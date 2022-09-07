@@ -8,7 +8,6 @@ const Header: React.FC = () => (
     <Link to="/">
       <PageHeader
         className="site-page-header"
-        // onBack={() => null}
         title="API図鑑"
         subTitle="様々なAPIが見れます"
       />

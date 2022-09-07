@@ -126,7 +126,7 @@ const RailsPage = () => {
   return (
     <>
       <Header />
-      <h1>TODOアプリ</h1>
+      <p className="text-3xl font-bold">TODOアプリ</p>
       <p>RailsAPIを用いたTODOアプリです。</p>
 
       <Link to="new">Todoを作成する</Link>
