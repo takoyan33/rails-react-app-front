@@ -1,6 +1,7 @@
 import React from "react";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import * as colors from "@material-ui/core/colors";
+import "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import IconButton from "@material-ui/core/IconButton";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
