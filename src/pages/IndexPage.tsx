@@ -9,7 +9,7 @@ const IndexPage: React.FC = () => {
   return (
     <div className="max-w-5xl m-auto">
       <Header />
-      {/* <Dark /> */}
+      <Dark />
       <p className="text-3xl font-bold">API図鑑</p>
       <p className="">API図鑑では、APIを用いたアプケーションを紹介します。</p>
       <br></br>
