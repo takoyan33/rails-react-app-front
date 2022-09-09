@@ -90,7 +90,7 @@ const RailsPage = () => {
   }, []);
 
   const removeAllTodos = () => {
-    const sure = window.confirm("Are you sure?");
+    const sure = window.confirm("全て削除しても大丈夫ですか？");
     //確認box
     if (sure) {
       axios
@@ -126,59 +126,63 @@ const RailsPage = () => {
   return (
     <>
       <Header />
-      <p className="text-3xl font-bold">TODOアプリ</p>
-      <p>RailsAPIを用いたTODOアプリです。</p>
+      <div className="max-w-5xl m-auto">
+        <p className="text-3xl font-bold">TODOアプリ</p>
+        <p>RailsAPIを用いたTODOアプリです。</p>
 
-      <Link to="new">Todoを作成する</Link>
+        <Link to="new">Todoを作成する</Link>
 
-      <SearchAndButtton>
-        <SearchForm
-          type="text"
-          placeholder="todoを探す"
-          onChange={(event) => {
-            setSearchName(event.target.value);
-          }}
-        />
-        <RemoveAllButton onClick={removeAllTodos}>Remove All</RemoveAllButton>
-      </SearchAndButtton>
-      <div>
-        {todos
-          .filter((val) => {
-            if (searchName === "") {
-              return val;
-              //そのまま返す
-            } else if (
-              val.name.toLowerCase().includes(searchName.toLowerCase())
-              //valのnameが含んでいたら小文字で返す　含んでいないvalは返さない
-            ) {
-              return val;
-            }
-          })
-          .map((val, key) => {
-            return (
-              <Row key={key}>
-                {val.is_completed ? (
-                  <CheckedBox>
-                    <ImCheckboxChecked
-                      onClick={() => updateIsCompleted(key, val)}
-                    />
-                  </CheckedBox>
-                ) : (
-                  <UncheckedBox>
-                    <ImCheckboxUnchecked
-                      onClick={() => updateIsCompleted(key, val)}
-                    />
-                  </UncheckedBox>
-                )}
-                <TodoName is_completed={val.is_completed}>{val.name}</TodoName>
-                <Link to={val.id + "/edit"} component={<EditTodo />}>
-                  <EditButton>
-                    <AiFillEdit />
-                  </EditButton>
-                </Link>
-              </Row>
-            );
-          })}
+        <SearchAndButtton>
+          <SearchForm
+            type="text"
+            placeholder="todoを探す"
+            onChange={(event) => {
+              setSearchName(event.target.value);
+            }}
+          />
+          <RemoveAllButton onClick={removeAllTodos}>全削除</RemoveAllButton>
+        </SearchAndButtton>
+        <div>
+          {todos
+            .filter((val) => {
+              if (searchName === "") {
+                return val;
+                //そのまま返す
+              } else if (
+                val.name.toLowerCase().includes(searchName.toLowerCase())
+                //valのnameが含んでいたら小文字で返す　含んでいないvalは返さない
+              ) {
+                return val;
+              }
+            })
+            .map((val, key) => {
+              return (
+                <Row key={key}>
+                  {val.is_completed ? (
+                    <CheckedBox>
+                      <ImCheckboxChecked
+                        onClick={() => updateIsCompleted(key, val)}
+                      />
+                    </CheckedBox>
+                  ) : (
+                    <UncheckedBox>
+                      <ImCheckboxUnchecked
+                        onClick={() => updateIsCompleted(key, val)}
+                      />
+                    </UncheckedBox>
+                  )}
+                  <TodoName is_completed={val.is_completed}>
+                    {val.name}
+                  </TodoName>
+                  <Link to={val.id + "/edit"} component={<EditTodo />}>
+                    <EditButton>
+                      <AiFillEdit />
+                    </EditButton>
+                  </Link>
+                </Row>
+              );
+            })}
+        </div>
       </div>
     </>
   );
