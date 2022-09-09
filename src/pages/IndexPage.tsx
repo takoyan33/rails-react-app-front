@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-// import Dark from "../components/Darkmode";
+import Dark from "../components/Darkmode";
 
 const IndexPage: React.FC = () => {
   return (
