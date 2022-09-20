@@ -8,8 +8,8 @@ const Header: React.FC = () => (
     <Link to="/">
       <PageHeader
         className="site-page-header"
-        title="API図鑑"
-        subTitle="様々なAPIが見れます"
+        title="APIずかん"
+        subTitle="APIに関する情報が見れるサイト"
       />
     </Link>
   </>

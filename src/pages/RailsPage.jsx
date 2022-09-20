@@ -79,7 +79,7 @@ const RailsPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/v1/todos.json")
+      .get("https://rails-react-app-backend.herokuapp.com/api/v1/todos.json")
       .then((resp) => {
         console.log(resp.data);
         setTodos(resp.data);
