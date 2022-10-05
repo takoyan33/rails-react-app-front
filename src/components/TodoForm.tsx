@@ -35,7 +35,7 @@ export const TodoForm: React.FC<TodoFormProps> = ({ todos, setTodos }) => {
 
   return (
     <>
-      {/* <form onSubmit={handleCreateTodo}>
+      <form onSubmit={handleCreateTodo}>
         <input
           type="text"
           value={title}
@@ -44,7 +44,7 @@ export const TodoForm: React.FC<TodoFormProps> = ({ todos, setTodos }) => {
           }}
         />
         <input type="submit" value="追加する" disabled={!title} />
-      </form> */}
+      </form>
     </>
   );
 };

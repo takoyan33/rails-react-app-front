@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Header from "../components/Header";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 
 const InputName = styled.input`
@@ -65,7 +66,7 @@ function EditTodo(props: any) {
 
   const getTodo = (id: { id: Readonly<Partial<{ id: string }>> }) => {
     axios
-      .get(`http://localhost:3000/api/v1/todos/${id}`)
+      .get(`http://localhost:4000/api/v1/todos/${id}`)
       .then((resp) => {
         setCurrentTodo(resp.data);
       })
@@ -131,7 +132,8 @@ function EditTodo(props: any) {
 
   return (
     <div className="max-w-5xl m-auto">
-      <p className="text-3xl font-bold">Todoを編集する</p>
+      <Header />
+      <p className="text-3xl font-bold">ニュースを編集する</p>
       <div>
         <div>
           <label htmlFor="name">現在の名前</label>
@@ -143,10 +145,10 @@ function EditTodo(props: any) {
             onChange={handleInputChange}
           />
           <div>
-            <span>タスクの状況</span>
+            <span>カテゴリ</span>
             <br />
             <CurrentStatus>
-              {currentTodo.is_completed ? "Completed" : "UnCompleted"}
+              {currentTodo.is_completed ? "お知らせ" : "イベント"}
             </CurrentStatus>
           </div>
         </div>

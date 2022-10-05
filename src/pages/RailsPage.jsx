@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import EditTodo from "./EditTodo";
+import Button from "@mui/material/Button";
 
 const SearchAndButtton = styled.div`
   display: flex;
@@ -79,7 +80,7 @@ const RailsPage = () => {
 
   useEffect(() => {
     axios
-      .get("https://rails-react-app-backend.herokuapp.com/api/v1/todos.json")
+      .get("http://localhost:4000/api/v1/todos")
       .then((resp) => {
         console.log(resp.data);
         setTodos(resp.data);
@@ -127,10 +128,11 @@ const RailsPage = () => {
     <>
       <Header />
       <div className="max-w-5xl m-auto">
-        <p className="text-3xl font-bold">TODOアプリ</p>
-        <p>RailsAPIを用いたTODOアプリです。</p>
+        <p className="text-3xl font-bold">新着ニュース</p>
 
-        <Link to="new">Todoを作成する</Link>
+        <Button variant="outlined">
+          <Link to="posts/new">ニュースを作成する</Link>
+        </Button>
 
         <SearchAndButtton>
           <SearchForm
