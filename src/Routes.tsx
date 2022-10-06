@@ -8,6 +8,7 @@ import AddTodo from "./pages/AddTodo";
 import Error from "./components/Error";
 import Dark from "./components/Darkmode";
 import Resas from "./pages/ResasPage";
+import AddPost from "./pages/AddPost";
 
 const Routers = () => {
   return (
@@ -22,6 +23,7 @@ const Routers = () => {
         <Route path="*" element={<Error />} />
         <Route path="/dark" element={<Dark />} />
         <Route path="/resas" element={<Resas />} />
+        <Route path="/posts/new" element={<AddPost />} />
       </Routes>
     </BrowserRouter>
   );

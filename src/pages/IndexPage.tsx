@@ -5,24 +5,20 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Dark from "../components/Darkmode";
 import apizukan from "../assets/apizukan.png";
-import { useQuery, gql } from "@apollo/client";
-
-const FETCH_BOOKS = gql`
-  query {
-    books {
-      id
-      title
-    }
-  }
-`;
-
-interface Book {
-  id: string;
-  title: string;
-}
+import {
+  useBooksQuery,
+  useCreateBookMutation,
+  useDeleteBookMutation,
+  useUpdateBookMutation,
+} from "../graphql/generated";
+import { useState } from "react";
 
 const IndexPage: React.FC = () => {
-  const { data: { books } = {} } = useQuery(FETCH_BOOKS);
+  const { data: { books = [] } = {} } = useBooksQuery();
+  const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
+  const [title, setTitle] = useState("");
+  const [updateBook] = useUpdateBookMutation();
+  const [deleteBook] = useDeleteBookMutation({ refetchQueries: ["books"] });
   return (
     <div className="max-w-5xl m-auto">
       <Header />
@@ -30,31 +26,54 @@ const IndexPage: React.FC = () => {
       <p className="text-3xl font-bold m-auto w-30">
         <img src={apizukan} className="m-auto w-40 my-6"></img>
       </p>
-      <p className="">
+      <p className="m-6">
         APIずかんでは、APIを用いた記事紹介やAPIに関する記事を投稿できます。
       </p>
       <br></br>
-
-      <Button variant="outlined">
-        <Link to="posts/new">記事を投稿する</Link>
-      </Button>
-      <h2 className="text-2xl font-bold">記事一覧</h2>
+      <p className="text-center">
+        <Button variant="outlined" className="text-center m-auto">
+          <Link to="posts/new">記事を投稿する</Link>
+        </Button>
+      </p>
+      <h2 className="text-2xl font-bold m-6">記事一覧</h2>
 
       {books &&
-        books.map((book: Book) => (
+        books.map((book) => (
           <div key={book.id} className="m-6">
-            <p>{book.title}</p>
+            <div>{book.title}</div>
+            <input
+              value={book.title || ""}
+              onChange={(e) =>
+                updateBook({
+                  variables: {
+                    id: book.id,
+                    params: { title: e.target.value },
+                  },
+                })
+              }
+            />
+            <button onClick={() => deleteBook({ variables: { id: book.id } })}>
+              削除
+            </button>
           </div>
         ))}
 
-      <h2 className="text-2xl font-bold">ニュース一覧</h2>
+      <input value={title} onChange={(e) => setTitle(e.target.value)} />
+      <button
+        onClick={() => {
+          createBook({ variables: { params: { title: title } } });
+          setTitle("");
+        }}
+      >
+        保存
+      </button>
 
       <Button variant="outlined">
-        <Link to="todos">ニュースはこちら</Link>
+        <Link to="todos">ニュース</Link>
       </Button>
-{/* 
+      {/* 
       <Stack direction="row" spacing={2}> */}
-        {/* <Button variant="outlined">
+      {/* <Button variant="outlined">
           <Link to="todos">RailsAPI</Link>
         </Button>
         <br></br>
