@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Header from "../components/Header";
 import { FiSend } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 
 const InputAndButton = styled.div`
@@ -87,6 +88,13 @@ function AddTodo(props: any) {
     <div className="max-w-5xl m-auto">
       <Header />
       <p className="text-3xl font-bold">新しいニュース</p>
+      <br></br>
+      <p>
+        <Link to="/">トップページ</Link>　＞　
+        <Link to="/todos/">ニュース一覧</Link>　＞　
+        <Link to="/todos/new">ニュース投稿</Link>
+      </p>
+      <br></br>
       <InputAndButton>
         <InputName
           type="text"

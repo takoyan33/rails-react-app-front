@@ -130,14 +130,21 @@ const RailsPage = () => {
       <div className="max-w-5xl m-auto">
         <p className="text-3xl font-bold">新着ニュース</p>
 
+        <br></br>
+        <p>
+          <Link to="/">トップページ</Link>　＞　
+          <Link to="/todos">ニュース一覧</Link>
+        </p>
+        <br></br>
+
         <Button variant="outlined">
-          <Link to="posts/new">ニュースを作成する</Link>
+          <Link to="/todos/new">ニュースを作成する</Link>
         </Button>
 
         <SearchAndButtton>
           <SearchForm
             type="text"
-            placeholder="todoを探す"
+            placeholder="ニュースを探す"
             onChange={(event) => {
               setSearchName(event.target.value);
             }}

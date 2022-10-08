@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Dark from "../components/Darkmode";
 import apizukan from "../assets/apizukan.png";
+import TextField from "@mui/material/TextField";
 import {
   useBooksQuery,
   useCreateBookMutation,
@@ -27,7 +28,7 @@ const IndexPage: React.FC = () => {
         <img src={apizukan} className="m-auto w-40 my-6"></img>
       </p>
       <p className="m-6">
-        APIずかんでは、APIを用いた記事紹介やAPIに関する記事を投稿できます。
+        ほくせいBoardでは、記事紹介やAPIに関する記事を投稿できます。
       </p>
       <br></br>
       <p className="text-center">
@@ -41,7 +42,10 @@ const IndexPage: React.FC = () => {
         books.map((book) => (
           <div key={book.id} className="m-6">
             <div>{book.title}</div>
-            <input
+            <TextField
+              id="standard-basic"
+              label="更新"
+              variant="standard"
               value={book.title || ""}
               onChange={(e) =>
                 updateBook({
@@ -52,13 +56,16 @@ const IndexPage: React.FC = () => {
                 })
               }
             />
-            <button onClick={() => deleteBook({ variables: { id: book.id } })}>
+            <Button
+              variant="outlined"
+              onClick={() => deleteBook({ variables: { id: book.id } })}
+            >
               削除
-            </button>
+            </Button>
           </div>
         ))}
 
-      <input value={title} onChange={(e) => setTitle(e.target.value)} />
+      {/* <input value={title} onChange={(e) => setTitle(e.target.value)} />
       <button
         onClick={() => {
           createBook({ variables: { params: { title: title } } });
@@ -66,11 +73,12 @@ const IndexPage: React.FC = () => {
         }}
       >
         保存
-      </button>
-
-      <Button variant="outlined">
-        <Link to="todos">ニュース</Link>
-      </Button>
+      </button> */}
+      <p className="text-center">
+        <Button variant="outlined" className="text-center m-auto">
+          <Link to="todos">ニュース</Link>
+        </Button>
+      </p>
       {/* 
       <Stack direction="row" spacing={2}> */}
       {/* <Button variant="outlined">
