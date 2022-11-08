@@ -6,62 +6,84 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { FiSend } from "react-icons/fi";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
-import { useBooksQuery, useCreateBookMutation } from "../graphql/generated";
+import {
+  useBooksQuery,
+  useCreateBookMutation,
+  useCreateMemberMutation,
+} from "../graphql/generated";
 import TextField from "@mui/material/TextField";
-
 
 function AddPost(props: any) {
   const { data: { books = [] } = {} } = useBooksQuery();
   const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
+  const [createMember] = useCreateMemberMutation({
+    refetchQueries: ["members"],
+  });
   const [title, setTitle] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [hurigana, setHurigana] = useState("");
+  const [grade, setGrade] = useState("");
+  const [gender, setGender] = useState("");
+  const [department, setDepartment] = useState("");
+  const [birthday, setBirthdaye] = useState("");
+  const [admin, setAdmin] = useState("");
 
   return (
     <div className="max-w-5xl m-auto">
       <Header />
-      <br></br>
       <p className="text-3xl font-bold">新しいメンバー登録</p>
-      <br></br>
       <p>
         <Link to="/">トップページ</Link>　＞　
         <Link to="/posts/new">メンバー登録</Link>
       </p>
-      <br></br>
+      <div>
+        <TextField
+          id="standard-basic"
+          label="名前"
+          variant="standard"
+          value={fullname}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div>
+        <TextField
+          id="standard-basic"
+          label="ふりがな"
+          variant="standard"
+          value={hurigana}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
       <TextField
         id="standard-basic"
-        label="名前"
+        label="学年"
         variant="standard"
-        value={title}
+        value={grade}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <br></br>
-      <br></br>
-      <TextField
-        id="standard-basic"
-        label="ふりがな"
-        variant="standard"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <br></br>
-      <br></br>
-      <TextField
-        id="standard-basic"
-        label="名前"
-        variant="standard"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <br></br>
-      <br></br>
-      <Button
-        variant="outlined"
-        onClick={() => {
-          createBook({ variables: { params: { title: title } } });
-          setTitle("");
-        }}
-      >
-        保存
-      </Button>
+      <div>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            createMember({
+              variables: {
+                params: {
+                  fullname: fullname,
+                  hurigana: hurigana,
+                  department: department,
+                  grade: fullname,
+                  gender: gender,
+                  birthday: birthday,
+                  admin: admin,
+                },
+              },
+            });
+            setTitle("");
+          }}
+        >
+          保存
+        </Button>
+      </div>
     </div>
   );
 }
