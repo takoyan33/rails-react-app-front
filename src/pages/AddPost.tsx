@@ -9,6 +9,7 @@ import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import { useBooksQuery, useCreateBookMutation } from "../graphql/generated";
 import TextField from "@mui/material/TextField";
 
+
 function AddPost(props: any) {
   const { data: { books = [] } = {} } = useBooksQuery();
   const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
@@ -18,16 +19,34 @@ function AddPost(props: any) {
     <div className="max-w-5xl m-auto">
       <Header />
       <br></br>
-      <p className="text-3xl font-bold">新しいAPI記事</p>
+      <p className="text-3xl font-bold">新しいメンバー登録</p>
       <br></br>
       <p>
         <Link to="/">トップページ</Link>　＞　
-        <Link to="/posts/new">記事投稿</Link>
+        <Link to="/posts/new">メンバー登録</Link>
       </p>
       <br></br>
       <TextField
         id="standard-basic"
-        label="タイトル名"
+        label="名前"
+        variant="standard"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <br></br>
+      <br></br>
+      <TextField
+        id="standard-basic"
+        label="ふりがな"
+        variant="standard"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <br></br>
+      <br></br>
+      <TextField
+        id="standard-basic"
+        label="名前"
         variant="standard"
         value={title}
         onChange={(e) => setTitle(e.target.value)}

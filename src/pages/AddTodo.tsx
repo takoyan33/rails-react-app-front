@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import { FiSend } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import useSWR from "swr";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 
 const InputAndButton = styled.div`
@@ -42,8 +43,6 @@ const Icon = styled.span`
   align-items: center;
   margin: 0 7px;
 `;
-
-// toast.configure();
 
 function AddTodo(props: any) {
   const initialTodoState = {

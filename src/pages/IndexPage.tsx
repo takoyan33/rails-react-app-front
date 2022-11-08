@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Dark from "../components/Darkmode";
 import apizukan from "../assets/apizukan.png";
 import TextField from "@mui/material/TextField";
+import { useMembersQuery } from "../graphql/generated";
 import {
   useBooksQuery,
   useCreateBookMutation,
@@ -15,53 +16,62 @@ import {
 import { useState } from "react";
 
 const IndexPage: React.FC = () => {
-  const { data: { books = [] } = {} } = useBooksQuery();
+  const { loading, error, data: { books = [] } = {} } = useBooksQuery();
+  const { data: { members = [] } = {} } = useMembersQuery();
+
   const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
   const [title, setTitle] = useState("");
   const [updateBook] = useUpdateBookMutation();
   const [deleteBook] = useDeleteBookMutation({ refetchQueries: ["books"] });
+
+  if (loading) return <p className="text-center">...loading</p>;
+  if (error) return <p className="text-center">{error.message}</p>;
   return (
     <div className="max-w-5xl m-auto">
       <Header />
       {/* <Dark /> */}
-      <p className="text-3xl font-bold m-auto w-30">
+      {/* <p className="text-3xl font-bold m-auto w-30">
         <img src={apizukan} className="m-auto w-40 my-6"></img>
-      </p>
+      </p> */}
       <p className="m-6">
-        ほくせいBoardでは、記事紹介やAPIに関する記事を投稿できます。
+        サークル管理アプリでは、部員管理やサークルの管理を楽に行えます。
       </p>
       <br></br>
       <p className="text-center">
         <Button variant="outlined" className="text-center m-auto">
-          <Link to="posts/new">記事を投稿する</Link>
+          <Link to="posts/new">メンバー登録をする</Link>
         </Button>
       </p>
-      <h2 className="text-2xl font-bold m-6">記事一覧</h2>
+      <h2 className="text-2xl font-bold m-6">メンバー一覧</h2>
+      <p className=" font-bold m-6">{members.length}件</p>
 
-      {books &&
-        books.map((book) => (
-          <div key={book.id} className="m-6">
-            <div>{book.title}</div>
-            <TextField
+      {members &&
+        members.map((member) => (
+          <div key={member.userid} className="m-6">
+            <p>名前：{member.fullname}</p>
+            <p>ふりがな：{member.hurigana}</p>
+            <p>出身：{member.department}</p>
+            <p>学年：{member.grade}</p>
+            {/* <TextField
               id="standard-basic"
               label="更新"
               variant="standard"
-              value={book.title || ""}
+              value={member.fullname || ""}
               onChange={(e) =>
                 updateBook({
                   variables: {
-                    id: book.id,
-                    params: { title: e.target.value },
+                    userid: member.userid,
+                    params: { fullname: e.target.value },
                   },
                 })
               }
             />
             <Button
               variant="outlined"
-              onClick={() => deleteBook({ variables: { id: book.id } })}
+              onClick={() => deleteBook({ variables: { userid: member.userid } })}
             >
               削除
-            </Button>
+            </Button> */}
           </div>
         ))}
 
@@ -76,7 +86,7 @@ const IndexPage: React.FC = () => {
       </button> */}
       <p className="text-center">
         <Button variant="outlined" className="text-center m-auto">
-          <Link to="todos">ニュース</Link>
+          <Link to="todos">ニュース一覧</Link>
         </Button>
       </p>
       {/* 

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import EditTodo from "./EditTodo";
 import Button from "@mui/material/Button";
-
+import { usePost } from "./fetch/usePost";
 const SearchAndButtton = styled.div`
   display: flex;
   justify-content: space-between;
@@ -77,18 +77,9 @@ const EditButton = styled.span`
 const RailsPage = () => {
   const [todos, setTodos] = useState([]);
   const [searchName, setSearchName] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/v1/todos")
-      .then((resp) => {
-        console.log(resp.data);
-        setTodos(resp.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+  const { data, isLoading, isError } = usePost();
+  if (isLoading) return <div>Loading</div>;
+  if (isError) return <div>Error</div>;
 
   const removeAllTodos = () => {
     const sure = window.confirm("全て削除しても大丈夫ですか？");
@@ -152,7 +143,7 @@ const RailsPage = () => {
           <RemoveAllButton onClick={removeAllTodos}>全削除</RemoveAllButton>
         </SearchAndButtton>
         <div>
-          {todos
+          {data
             .filter((val) => {
               if (searchName === "") {
                 return val;
