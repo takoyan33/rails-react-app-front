@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Header from "../components/Header";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import { apiKey } from "../components/env";
 
 const InputName = styled.input`
   font-size: 20px;
@@ -64,11 +65,11 @@ function EditTodo(props: any) {
 
   const { id } = useParams();
   console.log(id);
-  console.log(`http://localhost:4000/api/v1/todos/${id}`);
+  console.log(`${apiKey}/${id}`);
 
   const getTodo = (id) => {
     axios
-      .get(`http://localhost:4000/api/v1/todos/${id}`)
+      .get(`${apiKey}/${id}`)
       .then((resp) => {
         setCurrentTodo(resp.data);
       })
@@ -96,21 +97,16 @@ function EditTodo(props: any) {
       name: val.name,
       is_completed: !val.is_completed,
     };
-    axios
-      .patch(`http://localhost:4000/api/v1/todos/${val.id}`, data)
-      .then((resp) => {
-        alert("更新しました");
-        setCurrentTodo(resp.data);
-      });
+    axios.patch(`${apiKey}/${val.id}`, data).then((resp) => {
+      alert("更新しました");
+      setCurrentTodo(resp.data);
+    });
     console.log(val);
   };
 
   const updateTodo = () => {
     axios
-      .patch(
-        `http://localhost:4000/api/v1/todos/${currentTodo.id}`,
-        currentTodo
-      )
+      .patch(`${apiKey}/${currentTodo.id}`, currentTodo)
       .then((response) => {
         alert("編集が完了しました");
         navigate("/todos");
@@ -124,7 +120,7 @@ function EditTodo(props: any) {
     const sure = window.confirm("削除しても大丈夫ですか?");
     if (sure) {
       axios
-        .delete(`http://localhost:4000/api/v1/todos/${currentTodo.id}`)
+        .delete(`${apiKey}/${currentTodo.id}`)
         .then((resp) => {
           console.log(resp.data);
           alert("削除しました");
