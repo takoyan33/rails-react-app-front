@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import Dark from "../components/Darkmode";
 import apizukan from "../assets/apizukan.png";
 import TextField from "@mui/material/TextField";
+import { MantineProvider, Text } from "@mantine/core";
+
 import {
   useBooksQuery,
   useCreateBookMutation,
@@ -40,12 +42,14 @@ const IndexPage: React.FC = () => {
       <br></br>
       <p className="text-center">
         <Button variant="outlined" className="text-center m-auto">
-          <Link to="posts/new">メンバー登録をする</Link>
+          <Link to="member/new">メンバー登録をする</Link>
         </Button>
       </p>
-      <h2 className="text-2xl font-bold m-6">メンバー一覧</h2>
+      <h2 className="text-2xl font-bold m-6">メンバー1覧</h2>
       <p className=" font-bold m-6">{members.length}件</p>
-
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <Text>Welcome to Mantine!</Text>
+      </MantineProvider>
       {members &&
         members.map((member) => (
           <div key={member.userid} className="m-6">

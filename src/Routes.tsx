@@ -9,6 +9,7 @@ import Error from "./components/Error";
 import Dark from "./components/Darkmode";
 import Resas from "./pages/ResasPage";
 import AddPost from "./pages/AddPost";
+import AddMember from "./pages/AddMember";
 
 const Routers = () => {
   return (
@@ -18,6 +19,7 @@ const Routers = () => {
         <Route path="/qiita" element={<QiitaPage />} />
         <Route path="/todos" element={<RailsPage />} />
         <Route path="/todos/:id/edit" element={<EditTodo />} />
+        <Route path="/member/new" element={<AddMember />} />
         <Route path="/todos/new" element={<AddTodo />} />
         <Route path="/qiitapractice" element={<QiitapracticePage />} />
         <Route path="*" element={<Error />} />
