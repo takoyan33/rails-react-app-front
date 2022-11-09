@@ -1,15 +1,21 @@
 ## プロジェクトのタイトル
 
-メンバー管理サイト
+### メンバー管理サイト
 
-フロントエンド
+### フロントエンド
+
 rails-react-app-front.vercel.app
+
 Github
+
 https://github.com/takoyan33/rails-react-app-front
 
-バックエンド
+### バックエンド
+
 https://rails-react-app-backend.herokuapp.com/
+
 Github
+
 https://github.com/takoyan33/rails-react-app-backend
 
 ## プロジェクトの概要説明
