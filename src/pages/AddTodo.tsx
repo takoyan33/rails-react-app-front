@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import { FiSend } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
+import { apiKey } from "../components/env";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 
 const InputAndButton = styled.div`
@@ -62,13 +63,17 @@ function AddTodo(props: any) {
     setTodo({ ...todo, [name]: value });
   };
 
+  // const railsurl = process.env.REACT_APP_API_URL;
+
   const saveTodo = () => {
     var data = {
       name: todo.name,
     };
 
+    console.log(apiKey);
+
     axios
-      .post("http://localhost:4000/api/v1/todos", data)
+      .post(apiKey, data)
       .then((resp) => {
         setTodo({
           id: resp.data.id,

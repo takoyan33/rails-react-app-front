@@ -6,8 +6,7 @@ import Button from "@mui/material/Button";
 import Dark from "../components/Darkmode";
 import apizukan from "../assets/apizukan.png";
 import TextField from "@mui/material/TextField";
-import { MantineProvider, Text } from "@mantine/core";
-
+import { Badge, MantineProvider } from "@mantine/core";
 import {
   useBooksQuery,
   useCreateBookMutation,
@@ -45,18 +44,52 @@ const IndexPage: React.FC = () => {
           <Link to="member/new">メンバー登録をする</Link>
         </Button>
       </p>
-      <h2 className="text-2xl font-bold m-6">メンバー1覧</h2>
+      <h2 className="text-2xl font-bold m-6">メンバー一覧</h2>
       <p className=" font-bold m-6">{members.length}件</p>
-      <MantineProvider withGlobalStyles withNormalizeCSS>
-        <Text>Welcome to Mantine!</Text>
+      <MantineProvider
+        theme={{
+          fontFamily: "Greycliff CF, sans-serif",
+          colors: {
+            "ocean-blue": [
+              "#7AD1DD",
+              "#5FCCDB",
+              "#44CADC",
+              "#2AC9DE",
+              "#1AC2D9",
+              "#11B7CD",
+              "#09ADC3",
+              "#0E99AC",
+              "#128797",
+              "#147885",
+            ],
+            "bright-pink": [
+              "#F0BBDD",
+              "#ED9BCF",
+              "#EC7CC3",
+              "#ED5DB8",
+              "#F13EAF",
+              "#F71FA7",
+              "#FF00A1",
+              "#E00890",
+              "#C50E82",
+              "#AD1374",
+            ],
+          },
+        }}
+      >
+        <Badge color="bright-pink" variant="filled">
+          Bright pink badge
+        </Badge>
       </MantineProvider>
       {members &&
         members.map((member) => (
-          <div key={member.userid} className="m-6">
+          <div key={member.userid} className="m-6 border">
             <p>名前：{member.fullname}</p>
             <p>ふりがな：{member.hurigana}</p>
-            <p>出身：{member.department}</p>
+            <p>学部：{member.department}</p>
             <p>学年：{member.grade}</p>
+            <p>誕生日：{member.birthday}</p>
+            <p>管理者：{member.admin}</p>
             {/* <TextField
               id="standard-basic"
               label="更新"

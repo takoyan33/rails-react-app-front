@@ -15,6 +15,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.4",
     "@mantine/core": "^5.7.1",
+    "@mantine/form": "^5.7.1",
     "@mantine/hooks": "^5.7.1",
     "@material-ui/core": "^4.12.4",
     "@material-ui/styles": "^4.11.5",
