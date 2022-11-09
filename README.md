@@ -1,34 +1,44 @@
 ## プロジェクトのタイトル
 
-漫画考察.net
+メンバー管理サイト
 
-https://manga-kousatu-net-takoyan33.vercel.app/
+フロントエンド
+rails-react-app-front.vercel.app
+Github
+https://github.com/takoyan33/rails-react-app-front
+
+バックエンド
+https://rails-react-app-backend.herokuapp.com/
+Github
+https://github.com/takoyan33/rails-react-app-backend
 
 ## プロジェクトの概要説明
 
-漫画考察.net では、漫画の考察などを自由に投稿・閲覧できる web サイトです。
+メンバー管理アプリでは、大学や高校の部活のメンバーを管理できる web サイトです。
 
-2022 年の 6 月頃から制作を始めました。
+2022 年の 10 月頃から制作を始めました。
 
-実装した機能としては、記事投稿・編集・削除機能と会員登録・編集・削除機能を実装しています。
+実装した機能としては、メンバー登録・編集・削除機能とニュース機能を実装しています。
 
 ## 使用言語、環境
 
+### フロントエンド
+
 使用言語：TypeScript
 
-フレームワーク：React,Next.js
-
-認証：Firebase Authentication
+フレームワーク：React
 
 サーバー：Vercel
 
-テスト：Jest
+ライブラリ：Tailwind CSS,Mantine
 
-コード管理：Sourcetree
+### バックエンド
 
-データベース：Cloud Firestore (NoSQL)
+使用言語：Ruby
 
-ライブラリ：moment.js,Tailwind CSS,Material-UI,react-image-resizer,react-spinners
+フレームワーク：Ruby on Rails
+
+サーバー：Heroku
 
 ## 使い方
 
@@ -38,22 +48,12 @@ npm install
 
 yarn dev
 
-## デプロイ方法
-
-git add .
-git commit -m " "
-git push
-
 ### こだわりポイント
 
-・firestore でクラッド処理を行なっている点
+・Ruby と React でバックエンドとフロントエンドの処理を分けている
 
-・ユーザーの名前変更やプロフ画像の変更
+・GraphQL(メンバー登録）と RESTAPI(News 機能)を採用している。
 
 ### 今後の計画
 
-・全ファイルを TypeScript 化する
-
-・投稿の個別ページの作成
-
-・投稿検索機能実装
+・機能を拡張する
