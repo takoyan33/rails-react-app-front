@@ -4,7 +4,7 @@
 
 ### フロントエンド
 
-rails-react-app-front.vercel.app
+https://rails-react-app-front.vercel.app/
 
 Github
 
