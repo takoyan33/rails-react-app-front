@@ -8,6 +8,8 @@ import axios from "axios";
 import EditTodo from "./EditTodo";
 import Button from "@mui/material/Button";
 import { usePost } from "./fetch/usePost";
+import { apiKey } from "../components/env";
+
 const SearchAndButtton = styled.div`
   display: flex;
   justify-content: space-between;
@@ -78,15 +80,15 @@ const RailsPage = () => {
   const [todos, setTodos] = useState([]);
   const [searchName, setSearchName] = useState("");
   const { data, isLoading, isError } = usePost();
-  if (isLoading) return <div>Loading</div>;
-  if (isError) return <div>Error</div>;
+  if (isLoading) return <div>読み込み中</div>;
+  if (isError) return <div>エラーが出ました</div>;
 
   const removeAllTodos = () => {
     const sure = window.confirm("全て削除しても大丈夫ですか？");
     //確認box
     if (sure) {
       axios
-        .delete("http://localhost:4000/api/v1/todos/destroy_all")
+        .delete(`${apiKey}/destroy_all`)
         .then((resp) => {
           setTodos([]);
           //空の配列にする
@@ -106,7 +108,7 @@ const RailsPage = () => {
       //値が反転する true→false
     };
     axios
-      .patch(`http://localhost:4000/api/v1/todos/${val.id}`, data)
+      .patch(`${apiKey}/${val.id}`, data)
       .then((resp) => {
         const newTodos = [...todos];
         //スプレッド構文で開ける

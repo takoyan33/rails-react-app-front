@@ -59,12 +59,14 @@ function EditTodo(props: any) {
   };
 
   const [currentTodo, setCurrentTodo] = useState(initialTodoState);
+  const [ID, setID] = useState("");
   const navigate = useNavigate();
 
-  let id = useParams<{ id: string }>();
+  const { id } = useParams();
   console.log(id);
+  console.log(`http://localhost:4000/api/v1/todos/${id}`);
 
-  const getTodo = (id: { id: Readonly<Partial<{ id: string }>> }) => {
+  const getTodo = (id) => {
     axios
       .get(`http://localhost:4000/api/v1/todos/${id}`)
       .then((resp) => {
@@ -76,8 +78,11 @@ function EditTodo(props: any) {
   };
 
   useEffect(() => {
-    getTodo({ id });
+    getTodo(id);
   }, []);
+
+  console.log(currentTodo.name);
+  console.log(currentTodo);
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -97,6 +102,7 @@ function EditTodo(props: any) {
         alert("更新しました");
         setCurrentTodo(resp.data);
       });
+    console.log(val);
   };
 
   const updateTodo = () => {

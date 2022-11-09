@@ -63,8 +63,6 @@ function AddTodo(props: any) {
     setTodo({ ...todo, [name]: value });
   };
 
-  // const railsurl = process.env.REACT_APP_API_URL;
-
   const saveTodo = () => {
     var data = {
       name: todo.name,
