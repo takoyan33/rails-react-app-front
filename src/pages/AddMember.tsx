@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { Header } from "../components/Header";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { FiSend } from "react-icons/fi";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
-import { useCreateMemberMutation } from "../graphql/generated";
+import { useMembersQuery, useCreateMemberMutation } from "../graphql/generated";
 import TextField from "@mui/material/TextField";
 
 function AddMember() {
   const [createMember] = useCreateMemberMutation({
     refetchQueries: ["members"],
   });
+  const { data: { members = [] } = {} } = useMembersQuery();
+  console.log(members);
   const [fullname, setFullname] = useState("");
   const [hurigana, setHurigana] = useState("");
   const [grade, setGrade] = useState("");
@@ -20,6 +22,8 @@ function AddMember() {
   const [department, setDepartment] = useState("");
   const [birthday, setBirthdaye] = useState("");
   const [admin, setAdmin] = useState("0");
+
+  const navigate = useNavigate();
 
   return (
     <div className="flex">
@@ -104,8 +108,10 @@ function AddMember() {
               setFullname("");
               setHurigana("");
               setGrade("");
+              setGender("");
               setDepartment("");
               setBirthdaye("");
+              navigate("/");
             }}
           >
             保存
