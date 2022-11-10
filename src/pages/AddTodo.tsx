@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-// import Header from "../components/Header";
+import { Header } from "../components/Header";
 import { FiSend } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
@@ -88,7 +88,7 @@ function AddTodo(props: any) {
 
   return (
     <div className="max-w-5xl m-auto">
-      {/* <Header /> */}
+      <Header />
       <p className="text-3xl font-bold">新しいニュース</p>
       <br></br>
       <p>

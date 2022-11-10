@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 import { AiFillEdit } from "react-icons/ai";
 import styled from "styled-components";
-// import Header from "../components/Header";
+import { Header } from "../components/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import EditTodo from "./EditTodo";
@@ -107,19 +107,17 @@ const RailsPage = () => {
       is_completed: !val.is_completed,
       //値が反転する true→false
     };
-    axios
-      .patch(`${apiKey}/${val.id}`, data)
-      .then((resp) => {
-        const newTodos = [...todos];
-        //スプレッド構文で開ける
-        newTodos[index].is_completed = resp.data.is_completed;
-        //番号を指定する
-        setTodos(newTodos);
-      });
+    axios.patch(`${apiKey}/${val.id}`, data).then((resp) => {
+      const newTodos = [...todos];
+      //スプレッド構文で開ける
+      newTodos[index].is_completed = resp.data.is_completed;
+      //番号を指定する
+      setTodos(newTodos);
+    });
   };
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <div className="max-w-5xl m-auto">
         <p className="text-3xl font-bold">新着ニュース</p>
 

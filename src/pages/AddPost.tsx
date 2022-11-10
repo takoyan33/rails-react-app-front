@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-// import Header from "../components/Header";
+import { Header } from "../components/Header";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { FiSend } from "react-icons/fi";
@@ -12,7 +12,6 @@ import {
   useCreateMemberMutation,
 } from "../graphql/generated";
 import TextField from "@mui/material/TextField";
-import { Header } from "@mantine/core";
 
 function AddPost(props: any) {
   const { data: { books = [] } = {} } = useBooksQuery();
@@ -30,60 +29,62 @@ function AddPost(props: any) {
   const [admin, setAdmin] = useState("");
 
   return (
-    <div className="max-w-5xl m-auto">
-      {/* <Header /> */}
-      <p className="text-3xl font-bold">新しいメンバー登録</p>
-      <p>
-        <Link to="/">トップページ</Link>　＞　
-        <Link to="/posts/new">メンバー登録</Link>
-      </p>
-      <div>
+    <div className="flex">
+      <Header />
+      <div className="max-w-5xl m-auto">
+        <p className="text-3xl font-bold">新しいメンバー登録</p>
+        <p>
+          <Link to="/">トップページ</Link>　＞　
+          <Link to="/posts/new">メンバー登録</Link>
+        </p>
+        <div>
+          <TextField
+            id="standard-basic"
+            label="名前"
+            variant="standard"
+            value={fullname}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div>
+          <TextField
+            id="standard-basic"
+            label="ふりがな"
+            variant="standard"
+            value={hurigana}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
         <TextField
           id="standard-basic"
-          label="名前"
+          label="学年"
           variant="standard"
-          value={fullname}
+          value={grade}
           onChange={(e) => setTitle(e.target.value)}
         />
-      </div>
-      <div>
-        <TextField
-          id="standard-basic"
-          label="ふりがな"
-          variant="standard"
-          value={hurigana}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <TextField
-        id="standard-basic"
-        label="学年"
-        variant="standard"
-        value={grade}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <div>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            createMember({
-              variables: {
-                params: {
-                  fullname: fullname,
-                  hurigana: hurigana,
-                  department: department,
-                  grade: fullname,
-                  gender: gender,
-                  birthday: birthday,
-                  admin: admin,
+        <div>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              createMember({
+                variables: {
+                  params: {
+                    fullname: fullname,
+                    hurigana: hurigana,
+                    department: department,
+                    grade: fullname,
+                    gender: gender,
+                    birthday: birthday,
+                    admin: admin,
+                  },
                 },
-              },
-            });
-            setTitle("");
-          }}
-        >
-          保存
-        </Button>
+              });
+              setTitle("");
+            }}
+          >
+            保存
+          </Button>
+        </div>
       </div>
     </div>
   );

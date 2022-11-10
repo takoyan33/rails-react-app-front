@@ -11,6 +11,13 @@ import {
   createStyles,
   Stack,
 } from "@mantine/core";
+import {
+  AiFillHome,
+  AiFillFile,
+  AiFillEdit,
+  AiFillQuestionCircle,
+  AiFillInfoCircle,
+} from "react-icons/ai";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -46,31 +53,35 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const mockdata = [
-  { label: "TOP" },
-  { label: "メンバー登録" },
-  { label: "ニュース" },
-  { label: "About" },
-  { label: "サークルについて" },
+  { icon: <AiFillHome />, label: "TOP", href: "/" },
+  { icon: <AiFillEdit />, label: "メンバー登録", href: "/member/new" },
+  { icon: <AiFillFile />, label: "ニュース", href: "/todos" },
+  { icon: <AiFillQuestionCircle />, label: "About", href: "/about" },
+  { icon: <AiFillInfoCircle />, label: "サークルについて", href: "/" },
   // { label: "Security" },
   // { label: "Settings" },
 ];
 
 interface NavbarLinkProps {
+  href: string;
+  icon: any;
   label: string;
   active?: boolean;
   onClick?(): void;
 }
 
-function NavbarLink({ label, active, onClick }: NavbarLinkProps) {
+function NavbarLink({ icon, label, active, onClick, href }: NavbarLinkProps) {
   const { classes, cx } = useStyles();
   return (
     <Tooltip label={label} position="right" transitionDuration={0}>
-      <UnstyledButton
-        onClick={onClick}
-        className={cx(classes.link, { [classes.active]: active })}
-      >
-        <>アイコン</>
-      </UnstyledButton>
+      <Link to={href}>
+        <UnstyledButton
+          onClick={onClick}
+          className={cx(classes.link, { [classes.active]: active })}
+        >
+          {icon}
+        </UnstyledButton>
+      </Link>
     </Tooltip>
   );
 }
@@ -78,7 +89,7 @@ function NavbarLink({ label, active, onClick }: NavbarLinkProps) {
 export const Header = () => {
   const [active, setActive] = useState(2);
 
-  const links = mockdata.map((link, index) => (
+  const links = mockdata.map((link, index, icon) => (
     <NavbarLink
       {...link}
       key={link.label}
