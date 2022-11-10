@@ -17,13 +17,16 @@ import { Header } from "../components/Header";
 
 const IndexPage: React.FC = () => {
   const { loading, error, data: { books = [] } = {} } = useBooksQuery();
+  console.log(books);
   const { data: { members = [] } = {} } = useMembersQuery();
+  console.log(members);
   const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
   const [title, setTitle] = useState("");
   const [updateBook] = useUpdateBookMutation();
   const [deleteBook] = useDeleteBookMutation({ refetchQueries: ["books"] });
   if (loading) return <p className="text-center">...loading</p>;
-  if (error) return <p className="text-center">{error.message}</p>;
+  if (error)
+    return <p className="text-center">データ取得ができませんでした。</p>;
 
   return (
     <div className="flex">
