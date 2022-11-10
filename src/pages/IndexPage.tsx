@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Dark from "../components/Darkmode";
 import apizukan from "../assets/apizukan.png";
@@ -14,83 +12,49 @@ import {
   useUpdateBookMutation,
   useMembersQuery,
 } from "../graphql/generated";
-
 import { useState } from "react";
+import { Header } from "../components/Header";
 
 const IndexPage: React.FC = () => {
   const { loading, error, data: { books = [] } = {} } = useBooksQuery();
   const { data: { members = [] } = {} } = useMembersQuery();
-
   const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
   const [title, setTitle] = useState("");
   const [updateBook] = useUpdateBookMutation();
   const [deleteBook] = useDeleteBookMutation({ refetchQueries: ["books"] });
-
   if (loading) return <p className="text-center">...loading</p>;
   if (error) return <p className="text-center">{error.message}</p>;
+
   return (
-    <div className="max-w-5xl m-auto">
+    <div className="flex">
       <Header />
       {/* <Dark /> */}
       {/* <p className="text-3xl font-bold m-auto w-30">
         <img src={apizukan} className="m-auto w-40 my-6"></img>
       </p> */}
-      <p className="m-6">
-        サークル管理アプリでは、部員管理やサークルの管理を楽に行えます。
-      </p>
-      <br></br>
-      <p className="text-center">
-        <Button variant="outlined" className="text-center m-auto">
-          <Link to="member/new">メンバー登録をする</Link>
-        </Button>
-      </p>
-      <h2 className="text-2xl font-bold m-6">メンバー一覧</h2>
-      <p className=" font-bold m-6">{members.length}件</p>
-      <MantineProvider
-        theme={{
-          fontFamily: "Greycliff CF, sans-serif",
-          colors: {
-            "ocean-blue": [
-              "#7AD1DD",
-              "#5FCCDB",
-              "#44CADC",
-              "#2AC9DE",
-              "#1AC2D9",
-              "#11B7CD",
-              "#09ADC3",
-              "#0E99AC",
-              "#128797",
-              "#147885",
-            ],
-            "bright-pink": [
-              "#F0BBDD",
-              "#ED9BCF",
-              "#EC7CC3",
-              "#ED5DB8",
-              "#F13EAF",
-              "#F71FA7",
-              "#FF00A1",
-              "#E00890",
-              "#C50E82",
-              "#AD1374",
-            ],
-          },
-        }}
-      >
-        <Badge color="bright-pink" variant="filled">
-          Bright pink badge
-        </Badge>
-      </MantineProvider>
-      {members &&
-        members.map((member) => (
-          <div key={member.userid} className="m-6 border">
-            <p>名前：{member.fullname}</p>
-            <p>ふりがな：{member.hurigana}</p>
-            <p>学部：{member.department}</p>
-            <p>学年：{member.grade}</p>
-            <p>誕生日：{member.birthday}</p>
-            <p>管理者：{member.admin}</p>
-            {/* <TextField
+      <div className="max-w-7xl m-auto">
+        <h2>サークル管理アプリ</h2>
+        <p className="m-6">
+          サークル管理アプリでは、部員管理やサークルの管理を楽に行えます。
+        </p>
+        <br></br>
+        <p className="text-center">
+          <Button variant="outlined" className="text-center m-auto">
+            <Link to="member/new">メンバー登録をする</Link>
+          </Button>
+        </p>
+        <h2 className="text-2xl font-bold m-6">メンバー一覧</h2>
+        <p className=" font-bold m-6">{members.length}件</p>
+        {members &&
+          members.map((member) => (
+            <div key={member.userid} className="m-6 border">
+              <p>名前：{member.fullname}</p>
+              <p>ふりがな：{member.hurigana}</p>
+              <p>学部：{member.department}</p>
+              <p>学年：{member.grade}</p>
+              <p>誕生日：{member.birthday}</p>
+              <p>管理者：{member.admin}</p>
+              {/* <TextField
               id="standard-basic"
               label="更新"
               variant="standard"
@@ -110,10 +74,10 @@ const IndexPage: React.FC = () => {
             >
               削除
             </Button> */}
-          </div>
-        ))}
+            </div>
+          ))}
 
-      {/* <input value={title} onChange={(e) => setTitle(e.target.value)} />
+        {/* <input value={title} onChange={(e) => setTitle(e.target.value)} />
       <button
         onClick={() => {
           createBook({ variables: { params: { title: title } } });
@@ -122,37 +86,12 @@ const IndexPage: React.FC = () => {
       >
         保存
       </button> */}
-      <p className="text-center">
-        <Button variant="outlined" className="text-center m-auto">
-          <Link to="todos">ニュース一覧</Link>
-        </Button>
-      </p>
-      {/* 
-      <Stack direction="row" spacing={2}> */}
-      {/* <Button variant="outlined">
-          <Link to="todos">RailsAPI</Link>
-        </Button>
-        <br></br>
-        <br></br>
-        <Button variant="outlined">
-          <Link to="todos/new">TODO作成RAIlsAPI</Link>
-        </Button>
-        <br></br>
-        <br></br>
-        <Button variant="outlined">
-          <Link to="qiita">QiitaAPI</Link>
-        </Button>
-        <br></br>
-        <br></br>
-        <Button variant="outlined">
-          <Link to="qiitapractice">Qiita練習API</Link>
-        </Button>
-        <br></br>
-        <br></br>
-        <Button variant="outlined">
-          <Link to="resas">ResasAPI</Link>
-        </Button> */}
-      {/* </Stack> */}
+        <p className="text-center">
+          <Button variant="outlined" className="text-center m-auto">
+            <Link to="todos">ニュース一覧</Link>
+          </Button>
+        </p>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import { apiKey } from "../components/env";
 
@@ -134,7 +134,7 @@ function EditTodo(props: any) {
 
   return (
     <div className="max-w-5xl m-auto">
-      <Header />
+      {/* <Header /> */}
       <p className="text-3xl font-bold">ニュースを編集する</p>
       <div>
         <div>

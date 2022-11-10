@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { FiSend } from "react-icons/fi";
@@ -12,6 +12,7 @@ import {
   useCreateMemberMutation,
 } from "../graphql/generated";
 import TextField from "@mui/material/TextField";
+import { Header } from "@mantine/core";
 
 function AddPost(props: any) {
   const { data: { books = [] } = {} } = useBooksQuery();
@@ -30,7 +31,7 @@ function AddPost(props: any) {
 
   return (
     <div className="max-w-5xl m-auto">
-      <Header />
+      {/* <Header /> */}
       <p className="text-3xl font-bold">新しいメンバー登録</p>
       <p>
         <Link to="/">トップページ</Link>　＞　

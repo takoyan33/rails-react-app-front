@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 import { AiFillEdit } from "react-icons/ai";
 import styled from "styled-components";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import EditTodo from "./EditTodo";
@@ -119,7 +119,7 @@ const RailsPage = () => {
   };
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="max-w-5xl m-auto">
         <p className="text-3xl font-bold">新着ニュース</p>
 
