@@ -22,7 +22,6 @@ function AddMember() {
   const [department, setDepartment] = useState("");
   const [birthday, setBirthdaye] = useState("");
   const [admin, setAdmin] = useState("0");
-
   const navigate = useNavigate();
 
   return (
