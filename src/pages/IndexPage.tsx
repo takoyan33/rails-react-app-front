@@ -18,29 +18,30 @@ import { useState } from "react";
 import { Header } from "../components/Header";
 
 const IndexPage: React.FC = () => {
-  const { loading, error, data: { books = [] } = {} } = useBooksQuery();
-  console.log(books);
-  const { data: { members = [] } = {} } = useMembersQuery();
-  console.log(members);
-  const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
-  const [title, setTitle] = useState("");
-  const [updateBook] = useUpdateBookMutation();
-  const [deleteBook] = useDeleteBookMutation({ refetchQueries: ["books"] });
-  const [deleteMember] = useDeleteMemberMutation({
-    refetchQueries: ["members"],
-  });
-  const [updateMember] = useUpdateMemberMutation();
-  const [fullname, setFullname] = useState("");
-  const [hurigana, setHurigana] = useState("");
-  const [grade, setGrade] = useState("");
-  const [gender, setGender] = useState("");
-  const [department, setDepartment] = useState("");
-  const [birthday, setBirthdaye] = useState("");
-  const [admin, setAdmin] = useState("0");
+  // const { loading, error, data: { books = [] } = {} } = useBooksQuery();
+  // console.log(books);
+  // const { data: { members = [] } = {} } = useMembersQuery();
+  // console.log(members);
+  // const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
+  // const [title, setTitle] = useState("");
+  // const [updateBook] = useUpdateBookMutation();
+  // const [deleteBook] = useDeleteBookMutation({ refetchQueries: ["books"] });
+  // const [deleteMember] = useDeleteMemberMutation({
+  //   refetchQueries: ["members"],
+  // });
 
-  if (loading) return <p className="text-center">...loading</p>;
-  if (error)
-    return <p className="text-center">データ取得ができませんでした。</p>;
+  // const [updateMember] = useUpdateMemberMutation();
+  // const [fullname, setFullname] = useState("");
+  // const [hurigana, setHurigana] = useState("");
+  // const [grade, setGrade] = useState("");
+  // const [gender, setGender] = useState("");
+  // const [department, setDepartment] = useState("");
+  // const [birthday, setBirthdaye] = useState("");
+  // const [admin, setAdmin] = useState("0");
+
+  // if (loading) return <p className="text-center">...loading</p>;
+  // if (error)
+  //   return <p className="text-center">データ取得ができませんでした。</p>;
 
   return (
     <div className="flex">
@@ -61,7 +62,7 @@ const IndexPage: React.FC = () => {
           </Button>
         </p>
         <h2 className="text-2xl font-bold m-6">メンバー一覧</h2>
-        <p className=" font-bold m-6">{members.length}件</p>
+        {/* <p className=" font-bold m-6">{members.length}件</p> */}
         {/* {members &&
           members.map((member) => (
             <div key={member.id} className="m-6 border">
