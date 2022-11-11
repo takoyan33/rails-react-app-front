@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-// import { Header } from "../components/Header";
+import { Header } from "../components/Header";
 import { Link, Router } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { FiSend } from "react-icons/fi";
@@ -27,7 +27,7 @@ function AddMember() {
 
   return (
     <div className="flex">
-      {/* <Header /> */}
+      <Header />
       <div className="max-w-6xl m-auto">
         <p className="text-3xl font-bold">新しいメンバー登録</p>
         <p>

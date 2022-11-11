@@ -6,10 +6,6 @@ import apizukan from "../assets/apizukan.png";
 import TextField from "@mui/material/TextField";
 import { Badge, MantineProvider } from "@mantine/core";
 import {
-  useBooksQuery,
-  useCreateBookMutation,
-  useDeleteBookMutation,
-  useUpdateBookMutation,
   useMembersQuery,
   useDeleteMemberMutation,
   useUpdateMemberMutation,
@@ -18,30 +14,20 @@ import { useState } from "react";
 import { Header } from "../components/Header";
 
 const IndexPage: React.FC = () => {
-  // const { loading, error, data: { books = [] } = {} } = useBooksQuery();
-  // console.log(books);
-  // const { data: { members = [] } = {} } = useMembersQuery();
-  // console.log(members);
-  // const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
-  // const [title, setTitle] = useState("");
-  // const [updateBook] = useUpdateBookMutation();
-  // const [deleteBook] = useDeleteBookMutation({ refetchQueries: ["books"] });
-  // const [deleteMember] = useDeleteMemberMutation({
-  //   refetchQueries: ["members"],
-  // });
+  const { data: { members = [] } = {} } = useMembersQuery();
+  console.log(members);
+  const [deleteMember] = useDeleteMemberMutation({
+    refetchQueries: ["members"],
+  });
 
-  // const [updateMember] = useUpdateMemberMutation();
-  // const [fullname, setFullname] = useState("");
-  // const [hurigana, setHurigana] = useState("");
-  // const [grade, setGrade] = useState("");
-  // const [gender, setGender] = useState("");
-  // const [department, setDepartment] = useState("");
-  // const [birthday, setBirthdaye] = useState("");
-  // const [admin, setAdmin] = useState("0");
-
-  // if (loading) return <p className="text-center">...loading</p>;
-  // if (error)
-  //   return <p className="text-center">データ取得ができませんでした。</p>;
+  const [updateMember] = useUpdateMemberMutation();
+  const [fullname, setFullname] = useState("");
+  const [hurigana, setHurigana] = useState("");
+  const [grade, setGrade] = useState("");
+  const [gender, setGender] = useState("");
+  const [department, setDepartment] = useState("");
+  const [birthday, setBirthdaye] = useState("");
+  const [admin, setAdmin] = useState("0");
 
   return (
     <div className="flex">
