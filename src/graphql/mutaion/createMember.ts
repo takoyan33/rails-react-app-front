@@ -4,7 +4,7 @@ export default gql`
   mutation createMember($params: MemberAttributes!) {
     createMember(input: { params: $params }) {
       member {
-        userid
+        id
         fullname
         hurigana
         department

@@ -11,6 +11,8 @@ import {
   useDeleteBookMutation,
   useUpdateBookMutation,
   useMembersQuery,
+  useDeleteMemberMutation,
+  useUpdateMemberMutation,
 } from "../graphql/generated";
 import { useState } from "react";
 import { Header } from "../components/Header";
@@ -24,6 +26,18 @@ const IndexPage: React.FC = () => {
   const [title, setTitle] = useState("");
   const [updateBook] = useUpdateBookMutation();
   const [deleteBook] = useDeleteBookMutation({ refetchQueries: ["books"] });
+  const [deleteMember] = useDeleteMemberMutation({
+    refetchQueries: ["members"],
+  });
+  const [updateMember] = useUpdateMemberMutation();
+  const [fullname, setFullname] = useState("");
+  const [hurigana, setHurigana] = useState("");
+  const [grade, setGrade] = useState("");
+  const [gender, setGender] = useState("");
+  const [department, setDepartment] = useState("");
+  const [birthday, setBirthdaye] = useState("");
+  const [admin, setAdmin] = useState("0");
+
   if (loading) return <p className="text-center">...loading</p>;
   if (error)
     return <p className="text-center">データ取得ができませんでした。</p>;
@@ -50,45 +64,95 @@ const IndexPage: React.FC = () => {
         <p className=" font-bold m-6">{members.length}件</p>
         {members &&
           members.map((member) => (
-            <div key={member.userid} className="m-6 border">
+            <div key={member.id} className="m-6 border">
               <p>名前：{member.fullname}</p>
               <p>ふりがな：{member.hurigana}</p>
               <p>学部：{member.department}</p>
               <p>学年：{member.grade}</p>
               <p>誕生日：{member.birthday}</p>
               <p>管理者：{member.admin}</p>
-              {/* <TextField
-              id="standard-basic"
-              label="更新"
-              variant="standard"
-              value={member.fullname || ""}
-              onChange={(e) =>
-                updateBook({
-                  variables: {
-                    userid: member.userid,
-                    params: { fullname: e.target.value },
-                  },
-                })
-              }
-            />
-            <Button
-              variant="outlined"
-              onClick={() => deleteBook({ variables: { userid: member.userid } })}
-            >
-              削除
-            </Button> */}
+              <TextField
+                id="standard-basic"
+                label="名前"
+                variant="standard"
+                value={fullname}
+                onChange={(e) => setFullname(e.target.value)}
+              />
+              <div className="my-4">
+                <TextField
+                  id="standard-basic"
+                  label="ふりがな"
+                  variant="standard"
+                  value={hurigana}
+                  onChange={(e) => setHurigana(e.target.value)}
+                />
+              </div>
+              <div className="my-4">
+                <TextField
+                  id="standard-basic"
+                  label="学年"
+                  variant="standard"
+                  value={grade}
+                  onChange={(e) => setGrade(e.target.value)}
+                />
+              </div>
+              <div className="my-4">
+                <TextField
+                  id="standard-basic"
+                  label="性別"
+                  variant="standard"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                />
+              </div>
+              <div className="my-4">
+                <TextField
+                  id="standard-basic"
+                  label="学部"
+                  variant="standard"
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                />
+              </div>
+              <div className="my-4">
+                <TextField
+                  id="standard-basic"
+                  label="誕生日"
+                  variant="standard"
+                  value={birthday}
+                  onChange={(e) => setBirthdaye(e.target.value)}
+                />
+              </div>
+              <Button
+                variant="outlined"
+                onClick={() =>
+                  updateMember({
+                    variables: {
+                      id: member.id,
+                      params: {
+                        fullname: fullname,
+                        hurigana: hurigana,
+                        department: department,
+                        grade: grade,
+                        gender: gender,
+                        birthday: birthday,
+                        admin: admin,
+                      },
+                    },
+                  })
+                }
+              >
+                更新
+              </Button>
+
+              <Button
+                variant="outlined"
+                onClick={() => deleteMember({ variables: { id: member.id } })}
+              >
+                削除
+              </Button>
             </div>
           ))}
-
-        {/* <input value={title} onChange={(e) => setTitle(e.target.value)} />
-      <button
-        onClick={() => {
-          createBook({ variables: { params: { title: title } } });
-          setTitle("");
-        }}
-      >
-        保存
-      </button> */}
         <p className="text-center">
           <Button variant="outlined" className="text-center m-auto">
             <Link to="todos">ニュース一覧</Link>

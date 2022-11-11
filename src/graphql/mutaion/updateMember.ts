@@ -4,7 +4,7 @@ export default gql`
   mutation updateMember($id: ID!, $params: MemberAttributes!) {
     updateMember(input: { id: $id, params: $params }) {
       member {
-        userid
+        id
         fullname
         hurigana
         department

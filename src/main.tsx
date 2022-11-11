@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
+import { qlapiKey } from "./components/env";
 import App from "./App";
 import {
   ApolloClient,
@@ -10,7 +11,7 @@ import {
 } from "@apollo/client";
 
 const link = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: qlapiKey,
   credentials: "include",
 });
 
