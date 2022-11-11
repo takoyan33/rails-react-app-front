@@ -62,7 +62,7 @@ const IndexPage: React.FC = () => {
         </p>
         <h2 className="text-2xl font-bold m-6">メンバー一覧</h2>
         <p className=" font-bold m-6">{members.length}件</p>
-        {members &&
+        {/* {members &&
           members.map((member) => (
             <div key={member.id} className="m-6 border">
               <p>名前：{member.fullname}</p>
@@ -152,7 +152,7 @@ const IndexPage: React.FC = () => {
                 削除
               </Button>
             </div>
-          ))}
+          ))} */}
         <p className="text-center">
           <Button variant="outlined" className="text-center m-auto">
             <Link to="todos">ニュース一覧</Link>

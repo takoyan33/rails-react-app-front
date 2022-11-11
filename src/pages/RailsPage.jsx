@@ -81,7 +81,7 @@ const RailsPage = () => {
   const [searchName, setSearchName] = useState("");
   const { data, isLoading, isError } = usePost();
   if (isLoading) return <div>読み込み中</div>;
-  if (isError) return <div>エラーが出ました</div>;
+  if (isError) return <div>{isError.message}エラーが出ました</div>;
 
   const removeAllTodos = () => {
     const sure = window.confirm("全て削除しても大丈夫ですか？");
@@ -115,6 +115,9 @@ const RailsPage = () => {
       setTodos(newTodos);
     });
   };
+
+  console.log(apiKey);
+
   return (
     <>
       <Header />
