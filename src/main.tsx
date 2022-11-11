@@ -15,6 +15,8 @@ const link = createHttpLink({
   credentials: "include",
 });
 
+console.log(qlapiKey);
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: link,
