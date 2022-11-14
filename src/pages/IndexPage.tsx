@@ -14,6 +14,7 @@ import {
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { Input, Button } from "@mantine/core";
+import { qlapiKey } from "../components/env";
 
 const IndexPage: React.FC = () => {
   const { data: { members = [] } = {} } = useMembersQuery();
@@ -21,7 +22,7 @@ const IndexPage: React.FC = () => {
   const [deleteMember] = useDeleteMemberMutation({
     refetchQueries: ["members"],
   });
-
+  console.log(qlapiKey);
   const [updateMember] = useUpdateMemberMutation();
   const [fullname, setFullname] = useState("");
   const [hurigana, setHurigana] = useState("");
