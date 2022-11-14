@@ -33,9 +33,10 @@ function AddMember() {
   const [grade, setGrade] = useState("");
   const [gender, setGender] = useState("");
   const [department, setDepartment] = useState("");
-  const [birthday, setBirthdaye] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [admin, setAdmin] = useState("0");
   const navigate = useNavigate();
+  console.log(birthday);
 
   return (
     <div className="flex">
@@ -134,7 +135,7 @@ function AddMember() {
               placeholder="誕生日"
               type="date"
               value={birthday}
-              onChange={(e) => setBirthdaye(e.target.value)}
+              onChange={(e) => setBirthday(e.target.value)}
             />
           </Input.Wrapper>
         </div>
@@ -162,7 +163,7 @@ function AddMember() {
               setGrade("");
               setGender("");
               setDepartment("");
-              setBirthdaye("");
+              setBirthday("");
               navigate("/");
             }}
           >
