@@ -26,7 +26,7 @@ function AddPost(props: any) {
   const [gender, setGender] = useState("");
   const [department, setDepartment] = useState("");
   const [birthday, setBirthdaye] = useState("");
-  const [admin, setAdmin] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   return (
     <div className="flex">
@@ -69,6 +69,7 @@ function AddPost(props: any) {
               createMember({
                 variables: {
                   params: {
+                    profilepic: "aa",
                     fullname: fullname,
                     hurigana: hurigana,
                     department: department,
