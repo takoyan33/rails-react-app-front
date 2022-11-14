@@ -22,15 +22,6 @@ const client = new ApolloClient({
   link: link,
 });
 
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <ApolloProvider client={client}>
-//       <App />
-//     </ApolloProvider>
-//   </React.StrictMode>,
-//   document.getElementById("root")
-// );
-
 const container = document.getElementById("root");
 if (container) {
   const root = createRoot(container);
