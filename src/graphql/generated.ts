@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  ISO8601Date: any;
   ISO8601DateTime: any;
 };
 
@@ -99,8 +100,8 @@ export type DeleteMemberPayload = {
 };
 
 export type Member = {
-  admin?: Maybe<Scalars['String']>;
-  birthday?: Maybe<Scalars['String']>;
+  admin?: Maybe<Scalars['Boolean']>;
+  birthday?: Maybe<Scalars['ISO8601Date']>;
   createdAt: Scalars['ISO8601DateTime'];
   department?: Maybe<Scalars['String']>;
   fullname?: Maybe<Scalars['String']>;
@@ -108,18 +109,20 @@ export type Member = {
   grade?: Maybe<Scalars['String']>;
   hurigana?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  profilepic?: Maybe<Scalars['String']>;
   updatedAt: Scalars['ISO8601DateTime'];
   userid?: Maybe<Scalars['Int']>;
 };
 
 export type MemberAttributes = {
-  admin: Scalars['String'];
-  birthday: Scalars['String'];
+  admin: Scalars['Boolean'];
+  birthday: Scalars['ISO8601Date'];
   department: Scalars['String'];
   fullname: Scalars['String'];
   gender: Scalars['String'];
   grade: Scalars['String'];
   hurigana: Scalars['String'];
+  profilepic: Scalars['String'];
 };
 
 export type Mutation = {
@@ -236,7 +239,7 @@ export type CreateMemberMutationVariables = Exact<{
 }>;
 
 
-export type CreateMemberMutation = { createMember?: { member: { id: string, fullname?: string | null, hurigana?: string | null, department?: string | null, grade?: string | null, gender?: string | null, birthday?: string | null, admin?: string | null } } | null };
+export type CreateMemberMutation = { createMember?: { member: { id: string, fullname?: string | null, hurigana?: string | null, department?: string | null, grade?: string | null, gender?: string | null, birthday?: any | null, admin?: boolean | null } } | null };
 
 export type DeleteBookMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -266,7 +269,7 @@ export type UpdateMemberMutationVariables = Exact<{
 }>;
 
 
-export type UpdateMemberMutation = { updateMember?: { member: { id: string, fullname?: string | null, hurigana?: string | null, department?: string | null, grade?: string | null, gender?: string | null, birthday?: string | null, admin?: string | null } } | null };
+export type UpdateMemberMutation = { updateMember?: { member: { id: string, fullname?: string | null, hurigana?: string | null, department?: string | null, grade?: string | null, gender?: string | null, birthday?: any | null, admin?: boolean | null } } | null };
 
 export type BooksQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -276,7 +279,7 @@ export type BooksQuery = { books: Array<{ id: string, title?: string | null }> }
 export type MembersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MembersQuery = { members: Array<{ id: string, fullname?: string | null, hurigana?: string | null, department?: string | null, grade?: string | null, gender?: string | null, birthday?: string | null, admin?: string | null }> };
+export type MembersQuery = { members: Array<{ id: string, fullname?: string | null, hurigana?: string | null, department?: string | null, grade?: string | null, gender?: string | null, birthday?: any | null, admin?: boolean | null }> };
 
 
 export const CreateBookDocument = gql`

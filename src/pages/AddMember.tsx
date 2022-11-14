@@ -34,9 +34,8 @@ function AddMember() {
   const [gender, setGender] = useState("");
   const [department, setDepartment] = useState("");
   const [birthday, setBirthday] = useState("");
-  const [admin, setAdmin] = useState("0");
+  const [admin, setAdmin] = useState(false);
   const navigate = useNavigate();
-  console.log(birthday);
 
   return (
     <div className="flex">
@@ -147,6 +146,7 @@ function AddMember() {
               createMember({
                 variables: {
                   params: {
+                    profilepic: "aaa",
                     fullname: fullname,
                     hurigana: hurigana,
                     department: department,

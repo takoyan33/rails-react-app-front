@@ -188,13 +188,14 @@ const IndexPage: React.FC = () => {
                             variables: {
                               id: member.id,
                               params: {
+                                profilepic: "aaaa",
                                 fullname: fullname,
                                 hurigana: hurigana,
                                 department: department,
                                 grade: grade,
                                 gender: gender,
                                 birthday: birthday,
-                                admin: admin,
+                                admin: false,
                               },
                             },
                           })
