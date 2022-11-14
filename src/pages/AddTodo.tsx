@@ -1,49 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-// import { Header } from "../components/Header";
+import { Header } from "../components/Header";
 import { FiSend } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
 import { apiKey } from "../components/env";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import { Breadcrumbs, Anchor } from "@mantine/core";
+import { Input, Button } from "@mantine/core";
 
-const InputAndButton = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-`;
-
-const InputName = styled.input`
-  font-size: 20px;
-  width: 100%;
-  height: 40px;
-  padding: 2px 7px;
-`;
-
-const Button = styled.button`
-  font-size: 20px;
-  border: none;
-  border-radius: 3px;
-  margin-left: 10px;
-  padding: 2px 10px;
-  background: #1e90ff;
-  color: #fff;
-  text-align: center;
-  cursor: pointer;
-  ${({ disabled }) =>
-    disabled &&
-    `
-    opacity: 0.5;
-    cursor: default;
-  `}
-`;
-
-const Icon = styled.span`
-  display: flex;
-  align-items: center;
-  margin: 0 7px;
-`;
+const items = [
+  { title: "トップページ", href: "/" },
+  { title: "ニュース一覧", href: "/todos/" },
+  { title: "ニュース投稿", href: "/todos/new" },
+].map((item, index) => (
+  <Anchor href={item.href} key={index}>
+    <Link to={item.href}>{item.title}</Link>
+  </Anchor>
+));
 
 function AddTodo(props: any) {
   const initialTodoState = {
@@ -87,33 +62,41 @@ function AddTodo(props: any) {
   };
 
   return (
-    <div className="max-w-5xl m-auto">
-      {/* <Header /> */}
-      <p className="text-3xl font-bold">新しいニュース</p>
-      <br></br>
-      <p>
-        <Link to="/">トップページ</Link>　＞　
-        <Link to="/todos/">ニュース一覧</Link>　＞　
-        <Link to="/todos/new">ニュース投稿</Link>
-      </p>
-      <br></br>
-      <InputAndButton>
-        <InputName
-          type="text"
-          required
-          value={todo.name}
-          onChange={handleInputChange}
-          name="name"
-        />
-        <Button
-          onClick={saveTodo}
-          disabled={!todo.name || /^\s*$/.test(todo.name)}
+    <div className="flex">
+      <Header />
+      <div className="max-w-6xl m-auto m- mt-12">
+        <p className="text-3xl font-bold">新しいニュース</p>
+
+        <div className="my-4">
+          <Breadcrumbs>{items}</Breadcrumbs>
+        </div>
+
+        <Input.Wrapper
+          id="input-demo"
+          withAsterisk
+          label="ニュース内容"
+          description=""
+          error=""
         >
-          <Icon>
-            <FiSend />
-          </Icon>
-        </Button>
-      </InputAndButton>
+          <Input
+            type="text"
+            required
+            value={todo.name}
+            onChange={handleInputChange}
+            name="name"
+          />
+        </Input.Wrapper>
+        <div className="my-4">
+          <Button
+            variant="outline"
+            color="cyan"
+            onClick={saveTodo}
+            disabled={!todo.name || /^\s*$/.test(todo.name)}
+          >
+            投稿する
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -10,6 +10,16 @@ import TextField from "@mui/material/TextField";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input, Button } from "@mantine/core";
+import { Breadcrumbs, Anchor } from "@mantine/core";
+
+const items = [
+  { title: "トップページ", href: "/" },
+  { title: "メンバー登録", href: "/member/new" },
+].map((item, index) => (
+  <Anchor href={item.href} key={index}>
+    <Link to={item.href}>{item.title}</Link>
+  </Anchor>
+));
 
 function AddMember() {
   const notify = () => toast("メンバー登録できました！");
@@ -33,10 +43,9 @@ function AddMember() {
       <ToastContainer />
       <div className="max-w-6xl m-auto mt-12">
         <p className="text-3xl font-bold">新しいメンバー登録</p>
-        <p>
-          <Link to="/">トップページ</Link>　＞　
-          <Link to="/member/new">メンバー登録</Link>
-        </p>
+        <div className="my-4">
+          <Breadcrumbs>{items}</Breadcrumbs>
+        </div>
 
         <div className="my-4">
           <Input.Wrapper

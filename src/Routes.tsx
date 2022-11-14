@@ -10,6 +10,7 @@ import Dark from "./components/Darkmode";
 import Resas from "./pages/ResasPage";
 import AddPost from "./pages/AddPost";
 import AddMember from "./pages/AddMember";
+import AboutPage from "./pages/AboutPage";
 
 const Routers = () => {
   return (
@@ -26,6 +27,7 @@ const Routers = () => {
         <Route path="/dark" element={<Dark />} />
         <Route path="/resas" element={<Resas />} />
         <Route path="/posts/new" element={<AddPost />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </BrowserRouter>
   );

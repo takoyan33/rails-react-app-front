@@ -6,9 +6,10 @@ import { Header } from "../components/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import EditTodo from "./EditTodo";
-import Button from "@mui/material/Button";
 import { usePost } from "./fetch/usePost";
 import { apiKey } from "../components/env";
+import { Breadcrumbs, Anchor } from "@mantine/core";
+import { Input, Button } from "@mantine/core";
 
 const SearchAndButtton = styled.div`
   display: flex;
@@ -76,6 +77,15 @@ const EditButton = styled.span`
   margin: 0 7px;
 `;
 
+const items = [
+  { title: "トップページ", href: "/" },
+  { title: "ニュース一覧", href: "/todos/" },
+].map((item, index) => (
+  <Anchor href={item.href} key={index}>
+    <Link to={item.href}>{item.title}</Link>
+  </Anchor>
+));
+
 const RailsPage = () => {
   const [todos, setTodos] = useState([]);
   const [searchName, setSearchName] = useState("");
@@ -119,19 +129,16 @@ const RailsPage = () => {
   console.log(apiKey);
 
   return (
-    <>
+    <div className="flex">
       <Header />
-      <div className="max-w-5xl m-auto">
-        <p className="text-3xl font-bold">新着ニュース</p>
 
-        <br></br>
-        <p>
-          <Link to="/">トップページ</Link>　＞　
-          <Link to="/todos">ニュース一覧</Link>
-        </p>
-        <br></br>
+      <div className="max-w-8xl my-0  m-auto mt-10">
+        <p className="text-2xl font-bold">ニュース一覧</p>
+        <div className="my-4">
+          <Breadcrumbs>{items}</Breadcrumbs>
+        </div>
 
-        <Button variant="outlined">
+        <Button variant="outline" color="cyan">
           <Link to="/todos/new">ニュースを作成する</Link>
         </Button>
 
@@ -143,8 +150,8 @@ const RailsPage = () => {
               setSearchName(event.target.value);
             }}
           />
-          <RemoveAllButton onClick={removeAllTodos}>全削除</RemoveAllButton>
         </SearchAndButtton>
+        <p className="my-4">合計：{data.length}件</p>
         <div>
           {data
             .filter((val) => {
@@ -161,7 +168,7 @@ const RailsPage = () => {
             .map((val, key) => {
               return (
                 <Row key={key}>
-                  {val.is_completed ? (
+                  {/* {val.is_completed ? (
                     <CheckedBox>
                       <ImCheckboxChecked
                         onClick={() => updateIsCompleted(key, val)}
@@ -173,7 +180,7 @@ const RailsPage = () => {
                         onClick={() => updateIsCompleted(key, val)}
                       />
                     </UncheckedBox>
-                  )}
+                  )} */}
                   <TodoName is_completed={val.is_completed}>
                     {val.name}
                   </TodoName>
@@ -186,8 +193,11 @@ const RailsPage = () => {
               );
             })}
         </div>
+        <Button variant="outline" color="cyan" onClick={removeAllTodos}>
+          全削除
+        </Button>
       </div>
-    </>
+    </div>
   );
 };
 
