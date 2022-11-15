@@ -90,8 +90,11 @@ const RailsPage = () => {
   const [todos, setTodos] = useState([]);
   const [searchName, setSearchName] = useState("");
   const { data, isLoading, isError } = usePost();
-  if (isLoading) return <div>読み込み中</div>;
-  if (isError) return <div>{isError.message}エラーが出ました</div>;
+  if (isLoading) return <p className="text-center mt-10">読み込み中</p>;
+  if (isError)
+    return (
+      <p className="text-center mt-10">{isError.message}エラーが出ました</p>
+    );
 
   const removeAllTodos = () => {
     const sure = window.confirm("全て削除しても大丈夫ですか？");
