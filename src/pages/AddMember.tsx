@@ -90,7 +90,7 @@ function AddMember() {
           <Input.Wrapper
             id="input-demo"
             withAsterisk
-            label="名前"
+            label="学年"
             description=""
             error=""
           >

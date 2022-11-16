@@ -49,6 +49,10 @@ const IndexPage: React.FC = () => {
     };
   }, []);
 
+  const move = () => {
+    setIsUpdate(false);
+  };
+
   const getID = (
     id,
     fullname,
@@ -141,135 +145,154 @@ const IndexPage: React.FC = () => {
                     </Text>
                     {isUpdate && (
                       <>
-                        <Input.Wrapper
-                          id="input-demo"
-                          withAsterisk
-                          label="名前"
-                          description=""
-                          error=""
-                        >
-                          <Input
-                            placeholder="名前"
-                            value={fullname}
-                            onChange={(e) => setFullname(e.target.value)}
-                          />
-                        </Input.Wrapper>
-                        <div className="my-4">
-                          <Input.Wrapper
-                            id="input-demo"
-                            withAsterisk
-                            label="ふりがな"
-                            description=""
-                            error=""
-                          >
-                            <Input
-                              placeholder="ふりがな"
-                              value={hurigana}
-                              onChange={(e) => setHurigana(e.target.value)}
-                            />
-                          </Input.Wrapper>
-                        </div>
-                        <div className="my-4">
-                          <Input.Wrapper
-                            id="input-demo"
-                            withAsterisk
-                            label="学年"
-                            description=""
-                            error=""
-                          >
-                            <Input
-                              placeholder="学年"
-                              value={grade}
-                              onChange={(e) => setGrade(e.target.value)}
-                            />
-                          </Input.Wrapper>
-                        </div>
-                        <div className="my-4">
-                          <Input.Wrapper
-                            id="input-demo"
-                            withAsterisk
-                            label="性別"
-                            description=""
-                            error=""
-                          >
-                            <Input
-                              placeholder="性別"
-                              value={gender}
-                              onChange={(e) => setGender(e.target.value)}
-                            />
-                          </Input.Wrapper>
-                        </div>
-                        <div className="my-4">
-                          <Input.Wrapper
-                            id="input-demo"
-                            withAsterisk
-                            label="学部"
-                            description=""
-                            error=""
-                          >
-                            <Input
-                              placeholder="学部"
-                              value={department}
-                              onChange={(e) => setDepartment(e.target.value)}
-                            />
-                          </Input.Wrapper>
-                        </div>
-                        <div className="my-4">
-                          <Input.Wrapper
-                            id="input-demo"
-                            withAsterisk
-                            label="誕生日"
-                            description=""
-                            error=""
-                          >
-                            <Input
-                              placeholder="誕生日"
-                              type="date"
-                              value={birthday}
-                              onChange={(e) => setBirthdaye(e.target.value)}
-                            />
-                          </Input.Wrapper>
-                        </div>
-                        <div className="my-4">
-                          <Input.Wrapper
-                            id="input-demo"
-                            withAsterisk
-                            label="管理者"
-                            description=""
-                            error=""
-                          >
-                            <Checkbox
-                              label="管理者"
-                              checked={admin}
-                              onChange={handleCheckboxClick}
-                            />
-                          </Input.Wrapper>
-                        </div>
-                        <span className="m-2">
-                          <Button
-                            variant="outline"
-                            color="cyan"
-                            onClick={() =>
-                              updateMember({
-                                variables: {
-                                  id: member.id,
-                                  params: {
-                                    profilepic: "aaaa",
-                                    fullname: fullname,
-                                    hurigana: hurigana,
-                                    department: department,
-                                    grade: grade,
-                                    gender: gender,
-                                    birthday: birthday,
-                                    admin: admin,
-                                  },
-                                },
-                              })
-                            }
-                          >
-                            プロフィールを更新する
-                          </Button>
-                        </span>
+                        {member.id == ID && (
+                          <>
+                            <Input.Wrapper
+                              id="input-demo"
+                              withAsterisk
+                              label="名前"
+                              description=""
+                              error=""
+                            >
+                              <Input
+                                icon={<CiAt />}
+                                placeholder="名前"
+                                value={fullname}
+                                onChange={(e) => setFullname(e.target.value)}
+                              />
+                            </Input.Wrapper>
+                            <div className="my-4">
+                              <Input.Wrapper
+                                id="input-demo"
+                                withAsterisk
+                                label="ふりがな"
+                                description=""
+                                error=""
+                              >
+                                <Input
+                                  icon={<CiAt />}
+                                  placeholder="ふりがな"
+                                  value={hurigana}
+                                  onChange={(e) => setHurigana(e.target.value)}
+                                />
+                              </Input.Wrapper>
+                            </div>
+                            <div className="my-4">
+                              <Input.Wrapper
+                                id="input-demo"
+                                withAsterisk
+                                label="学年"
+                                description=""
+                                error=""
+                              >
+                                <Input
+                                  icon={<CiFaceSmile />}
+                                  placeholder="学年"
+                                  value={grade}
+                                  onChange={(e) => setGrade(e.target.value)}
+                                />
+                              </Input.Wrapper>
+                            </div>
+                            <div className="my-4">
+                              <Input.Wrapper
+                                id="input-demo"
+                                withAsterisk
+                                label="性別"
+                                description=""
+                                error=""
+                              >
+                                <Input
+                                  icon={<CiUser />}
+                                  placeholder="性別"
+                                  value={gender}
+                                  onChange={(e) => setGender(e.target.value)}
+                                />
+                              </Input.Wrapper>
+                            </div>
+                            <div className="my-4">
+                              <Input.Wrapper
+                                id="input-demo"
+                                withAsterisk
+                                label="学部"
+                                description=""
+                                error=""
+                              >
+                                <Input
+                                  icon={<CiHome />}
+                                  placeholder="学部"
+                                  value={department}
+                                  onChange={(e) =>
+                                    setDepartment(e.target.value)
+                                  }
+                                />
+                              </Input.Wrapper>
+                            </div>
+                            <div className="my-4">
+                              <Input.Wrapper
+                                id="input-demo"
+                                withAsterisk
+                                label="誕生日"
+                                description=""
+                                error=""
+                              >
+                                <Input
+                                  icon={<CiCalendarDate />}
+                                  placeholder="誕生日"
+                                  type="date"
+                                  value={birthday}
+                                  onChange={(e) => setBirthdaye(e.target.value)}
+                                />
+                              </Input.Wrapper>
+                            </div>
+                            <div className="my-4">
+                              <Input.Wrapper
+                                id="input-demo"
+                                withAsterisk
+                                label="管理者"
+                                description=""
+                                error=""
+                              >
+                                <Checkbox
+                                  label="管理者"
+                                  checked={admin}
+                                  onChange={handleCheckboxClick}
+                                />
+                              </Input.Wrapper>
+                            </div>
+                            <span className="m-2">
+                              <Button
+                                variant="outline"
+                                color="cyan"
+                                onClick={() =>
+                                  updateMember({
+                                    variables: {
+                                      id: member.id,
+                                      params: {
+                                        profilepic: "aaaa",
+                                        fullname: fullname,
+                                        hurigana: hurigana,
+                                        department: department,
+                                        grade: grade,
+                                        gender: gender,
+                                        birthday: birthday,
+                                        admin: admin,
+                                      },
+                                    },
+                                  })
+                                }
+                              >
+                                プロフィールを更新する
+                              </Button>
+                              <Button
+                                variant="outline"
+                                color="cyan"
+                                onClick={move}
+                              >
+                                編集を終了する
+                              </Button>
+                            </span>
+                          </>
+                        )}
                       </>
                     )}
                     <Button
