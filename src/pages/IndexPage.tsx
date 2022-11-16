@@ -13,8 +13,18 @@ import {
 import { useState, useMemo } from "react";
 import { Header } from "../components/Header";
 import { qlapiKey } from "../components/env";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {
+  CiFaceSmile,
+  CiUser,
+  CiHome,
+  CiAt,
+  CiCalendarDate,
+} from "react-icons/ci";
 
 const IndexPage: React.FC = () => {
+  const notify = () => toast("記事投稿ができました！");
   const { data: { members = [] } = {} } = useMembersQuery();
   console.log(members);
   const [deleteMember] = useDeleteMemberMutation({
@@ -69,9 +79,9 @@ const IndexPage: React.FC = () => {
         <img src={apizukan} className="m-auto w-40 my-6"></img>
       </p> */}
       <div className="max-w-7xl m-auto mt-10">
-        <h2 className="text-2xl text-center">サークル管理アプリ</h2>
+        <h2 className="text-2xl text-center">Clubmemo</h2>
         <p className="m-6">
-          サークル管理アプリでは、部員管理やサークルの管理を楽に行えます。
+          Clubmemoでは、部員管理やサークルの情報管理を楽に行えます。
         </p>
         <br></br>
         <p className="text-center">
@@ -79,8 +89,9 @@ const IndexPage: React.FC = () => {
             <Link to="member/new">メンバー登録をする</Link>
           </Button>
         </p>
-        <h2 className="text-2xl font-bold m-6">メンバー一覧</h2>
-        <p className=" font-bold m-6">{members.length}人</p>
+        <h2 className="text-2xl font-bold m-6 text-center">
+          メンバー一覧 {members.length}人
+        </h2>
         {members && members.length == 0 && (
           <p className="text-center my-6">まだ登録されていません</p>
         )}
@@ -98,22 +109,30 @@ const IndexPage: React.FC = () => {
                       />
                     </Card.Section>
                     <Text weight={500} size="lg" mt="md">
-                      名前：{member.fullname}
+                      <div className="whitespace-nowrap">
+                        名前：{member.fullname}
+                        {member.fullname == "" && <span>データ無し</span>}
+                      </div>
                     </Text>
                     <Text mt="xs" color="dimmed" size="sm">
                       ふりがな：{member.hurigana}
+                      {member.hurigana == "" && <span>データ無し</span>}
                     </Text>
                     <Text mt="xs" color="dimmed" size="sm">
                       学部：{member.department}
+                      {member.department == "" && <span>データ無し</span>}
                     </Text>
                     <Text mt="xs" color="dimmed" size="sm">
                       性別：{member.gender}
+                      {member.gender == "" && <span>データ無し</span>}
                     </Text>
                     <Text mt="xs" color="dimmed" size="sm">
                       学年：{member.grade}
+                      {member.grade == "" && <span>データ無し</span>}
                     </Text>
                     <Text mt="xs" color="dimmed" size="sm">
                       誕生日：{member.birthday}
+                      {member.birthday == "" && <span>データ無し</span>}
                     </Text>
                     <Text mt="xs" color="dimmed" size="sm">
                       管理者：
@@ -245,12 +264,10 @@ const IndexPage: React.FC = () => {
                                     admin: admin,
                                   },
                                 },
-                              }
-                              )
+                              })
                             }
-                            
                           >
-                            更新
+                            プロフィールを更新する
                           </Button>
                         </span>
                       </>

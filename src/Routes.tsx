@@ -8,7 +8,7 @@ import AddTodo from "./pages/AddTodo";
 import Error from "./components/Error";
 import Dark from "./components/Darkmode";
 import Resas from "./pages/ResasPage";
-import AddPost from "./pages/AddPost";
+import AddPost from "./pages/_AddPost";
 import AddMember from "./pages/AddMember";
 import AboutPage from "./pages/AboutPage";
 

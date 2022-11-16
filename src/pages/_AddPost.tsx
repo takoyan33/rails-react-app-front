@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { FiSend } from "react-icons/fi";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   useBooksQuery,
   useCreateBookMutation,
@@ -14,6 +17,7 @@ import {
 import TextField from "@mui/material/TextField";
 
 function AddPost(props: any) {
+  const notify = () => toast("記事投稿ができました！");
   const { data: { books = [] } = {} } = useBooksQuery();
   const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
   const [createMember] = useCreateMemberMutation({
@@ -80,11 +84,13 @@ function AddPost(props: any) {
                   },
                 },
               });
+              notify();
               setTitle("");
             }}
           >
             保存
           </Button>
+          <ToastContainer />
         </div>
       </div>
     </div>

@@ -11,6 +11,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input, Button } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
+import {
+  CiFaceSmile,
+  CiUser,
+  CiHome,
+  CiAt,
+  CiCalendarDate,
+} from "react-icons/ci";
 
 const items = [
   { title: "トップページ", href: "/" },
@@ -56,6 +63,7 @@ function AddMember() {
             error=""
           >
             <Input
+              icon={<CiAt />}
               placeholder="名前"
               value={fullname}
               onChange={(e) => setFullname(e.target.value)}
@@ -71,6 +79,7 @@ function AddMember() {
             error=""
           >
             <Input
+              icon={<CiAt />}
               placeholder="ふりがな"
               value={hurigana}
               onChange={(e) => setHurigana(e.target.value)}
@@ -86,6 +95,7 @@ function AddMember() {
             error=""
           >
             <Input
+              icon={<CiFaceSmile />}
               placeholder="学年"
               value={grade}
               onChange={(e) => setGrade(e.target.value)}
@@ -101,6 +111,7 @@ function AddMember() {
             error=""
           >
             <Input
+              icon={<CiUser />}
               placeholder="性別"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
@@ -116,6 +127,7 @@ function AddMember() {
             error=""
           >
             <Input
+              icon={<CiHome />}
               placeholder="学部"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
@@ -131,6 +143,7 @@ function AddMember() {
             error=""
           >
             <Input
+              icon={<CiCalendarDate />}
               placeholder="誕生日"
               type="date"
               value={birthday}
