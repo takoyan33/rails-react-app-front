@@ -87,7 +87,6 @@ const IndexPage: React.FC = () => {
         <p className="m-6">
           Clubmemoでは、部員管理やサークルの情報管理を楽に行えます。
         </p>
-        <br></br>
         <p className="text-center">
           <Button variant="outline" color="cyan" className="text-center m-auto">
             <Link to="member/new">メンバー登録をする</Link>
@@ -295,33 +294,38 @@ const IndexPage: React.FC = () => {
                         )}
                       </>
                     )}
-                    <Button
-                      variant="outline"
-                      color="cyan"
-                      onClick={() =>
-                        getID(
-                          member.id,
-                          member.fullname,
-                          member.hurigana,
-                          member.department,
-                          member.grade,
-                          member.gender,
-                          member.birthday,
-                          member.admin
-                        )
-                      }
-                    >
-                      編集
-                    </Button>
-                    <Button
-                      variant="outline"
-                      color="cyan"
-                      onClick={() =>
-                        deleteMember({ variables: { id: member.id } })
-                      }
-                    >
-                      削除
-                    </Button>
+
+                    <span className="m-2">
+                      <Button
+                        variant="outline"
+                        color="cyan"
+                        onClick={() =>
+                          getID(
+                            member.id,
+                            member.fullname,
+                            member.hurigana,
+                            member.department,
+                            member.grade,
+                            member.gender,
+                            member.birthday,
+                            member.admin
+                          )
+                        }
+                      >
+                        編集
+                      </Button>
+                    </span>
+                    <span className="m-2">
+                      <Button
+                        variant="outline"
+                        color="cyan"
+                        onClick={() =>
+                          deleteMember({ variables: { id: member.id } })
+                        }
+                      >
+                        削除
+                      </Button>
+                    </span>
                   </div>
                 </Card>
               </Grid.Col>

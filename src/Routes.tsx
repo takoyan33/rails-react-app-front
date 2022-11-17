@@ -11,6 +11,7 @@ import Resas from "./pages/ResasPage";
 import AddPost from "./pages/_AddPost";
 import AddMember from "./pages/AddMember";
 import AboutPage from "./pages/AboutPage";
+import AddClub from "./pages/AddClub";
 
 const Routers = () => {
   return (
@@ -20,6 +21,7 @@ const Routers = () => {
         <Route path="/qiita" element={<QiitaPage />} />
         <Route path="/todos" element={<RailsPage />} />
         <Route path="/todos/:id/edit" element={<EditTodo />} />
+        <Route path="/club/new" element={<AddClub />} />
         <Route path="/member/new" element={<AddMember />} />
         <Route path="/todos/new" element={<AddTodo />} />
         <Route path="/qiitapractice" element={<QiitapracticePage />} />
