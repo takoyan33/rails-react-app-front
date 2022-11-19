@@ -22,6 +22,7 @@ import {
   CiAt,
   CiCalendarDate,
 } from "react-icons/ci";
+import { Oval } from "react-loader-spinner";
 
 const IndexPage: React.FC = () => {
   const notify = () => toast("記事投稿ができました！");
@@ -77,7 +78,6 @@ const IndexPage: React.FC = () => {
   return (
     <div className="flex">
       <Header />
-
       {/* <Dark /> */}
       {/* <p className="text-3xl font-bold m-auto w-30">
         <img src={apizukan} className="m-auto w-40 my-6"></img>
@@ -96,7 +96,20 @@ const IndexPage: React.FC = () => {
           メンバー一覧 {members.length}人
         </h2>
         {members && members.length == 0 && (
-          <p className="text-center my-6">まだ登録されていません</p>
+          <p className="text-center my-6 m-auto">
+            <Oval
+              height={80}
+              width={80}
+              color="#4fa94d"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              ariaLabel="oval-loading"
+              secondaryColor="#4fa94d"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </p>
         )}
         <Grid>
           {members &&
