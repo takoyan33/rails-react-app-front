@@ -21,7 +21,7 @@ import {
 
 const items = [
   { title: "トップページ", href: "/" },
-  { title: "メンバー登録", href: "/member/new" },
+  { title: "クラブの新規登録", href: "/register" },
 ].map((item, index) => (
   <Anchor href={item.href} key={index}>
     <Link to={item.href}>{item.title}</Link>
@@ -49,7 +49,7 @@ function AddClub() {
       <Header />
       <ToastContainer />
       <div className="max-w-6xl m-auto mt-12">
-        <p className="text-3xl font-bold">クラブの登録</p>
+        <p className="text-3xl font-bold">クラブの新規登録</p>
         <div className="my-4">
           <Breadcrumbs>{items}</Breadcrumbs>
         </div>
@@ -80,7 +80,7 @@ function AddClub() {
           >
             <Input
               icon={<CiAt />}
-              placeholder="AddClub"
+              placeholder="高校の部活、大学のサークル"
               value={hurigana}
               onChange={(e) => setHurigana(e.target.value)}
             />
@@ -167,6 +167,43 @@ function AddClub() {
             />
           </Input.Wrapper>
         </div>
+
+        <div className="my-4">
+          <Input.Wrapper
+            id="input-demo"
+            withAsterisk
+            label="メールアドレス"
+            description=""
+            error=""
+          >
+            <Input
+              icon={<CiCalendarDate />}
+              placeholder="メールアドレス"
+              type="email"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+            />
+          </Input.Wrapper>
+        </div>
+
+        <div className="my-4">
+          <Input.Wrapper
+            id="input-demo"
+            withAsterisk
+            label="パスワード"
+            description=""
+            error=""
+          >
+            <Input
+              icon={<CiCalendarDate />}
+              placeholder="パスワード"
+              type="password"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+            />
+          </Input.Wrapper>
+        </div>
+
         <div className="my-4 text-center m-auto">
           <Button
             variant="outline"

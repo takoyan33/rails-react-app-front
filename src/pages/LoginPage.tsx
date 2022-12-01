@@ -21,7 +21,7 @@ import {
 
 const items = [
   { title: "トップページ", href: "/" },
-  { title: "メンバー登録", href: "/member/new" },
+  { title: "クラブのログイン", href: "/login" },
 ].map((item, index) => (
   <Anchor href={item.href} key={index}>
     <Link to={item.href}>{item.title}</Link>
@@ -49,7 +49,7 @@ function AddClub() {
       <Header />
       <ToastContainer />
       <div className="max-w-6xl m-auto mt-12">
-        <p className="text-3xl font-bold">クラブの登録</p>
+        <p className="text-3xl font-bold">クラブのログイン</p>
         <div className="my-4">
           <Breadcrumbs>{items}</Breadcrumbs>
         </div>
@@ -58,115 +58,38 @@ function AddClub() {
           <Input.Wrapper
             id="input-demo"
             withAsterisk
-            label="名前"
+            label="メールアドレス"
             description=""
             error=""
           >
             <Input
               icon={<CiAt />}
-              placeholder="名前"
+              placeholder="メールアドレス"
+              type="email"
               value={fullname}
               onChange={(e) => setFullname(e.target.value)}
             />
           </Input.Wrapper>
         </div>
+
         <div className="my-4">
           <Input.Wrapper
             id="input-demo"
             withAsterisk
-            label="種類"
+            label="パスワード"
             description=""
             error=""
           >
             <Input
               icon={<CiAt />}
-              placeholder="AddClub"
+              placeholder="パスワード"
+              type="password"
               value={hurigana}
               onChange={(e) => setHurigana(e.target.value)}
             />
           </Input.Wrapper>
         </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="学年"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiFaceSmile />}
-              placeholder="学年"
-              value={grade}
-              onChange={(e) => setGrade(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="概要"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiUser />}
-              placeholder="概要"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="顧問の先生"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiUser />}
-              placeholder="顧問の先生"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="活動日"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiHome />}
-              placeholder="活動日"
-              value={department}
-              onChange={(e) => setDepartment(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="設立年"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiCalendarDate />}
-              placeholder="設立年"
-              type="date"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
+
         <div className="my-4 text-center m-auto">
           <Button
             variant="outline"
@@ -196,7 +119,7 @@ function AddClub() {
               navigate("/");
             }}
           >
-            登録する
+            ログインする
           </Button>
         </div>
       </div>

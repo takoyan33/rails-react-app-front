@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-// import Header from "../components/Header";
+import { Header } from "../components/Header";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import { apiKey } from "../components/env";
+import { Breadcrumbs, Anchor } from "@mantine/core";
+import { Link, Router } from "react-router-dom";
+import { Input, Button } from "@mantine/core";
 
 const InputName = styled.input`
   font-size: 20px;
@@ -51,6 +54,16 @@ const DeleteButton = styled.button`
   border-radius: 3px;
   cursor: pointer;
 `;
+
+const items = [
+  { title: "トップページ", href: "/" },
+  { title: "ニュース一覧", href: "/todos/" },
+  { title: "ニュース投稿", href: "/news/new" },
+].map((item, index) => (
+  <Anchor href={item.href} key={index}>
+    <Link to={item.href}>{item.title}</Link>
+  </Anchor>
+));
 
 function EditTodo(props: any) {
   const initialTodoState = {
@@ -133,49 +146,46 @@ function EditTodo(props: any) {
   };
 
   return (
-    <div className="max-w-5xl m-auto">
-      {/* <Header /> */}
-      <p className="text-3xl font-bold">ニュースを編集する</p>
-      <div>
-        <div>
-          <label htmlFor="name">現在の名前</label>
-          <InputName
-            type="text"
-            id="name"
-            name="name"
-            value={currentTodo.name}
-            onChange={handleInputChange}
-          />
-          <div>
-            <span>カテゴリ</span>
-            <br />
-            <CurrentStatus>
-              {currentTodo.is_completed ? "お知らせ" : "イベント"}
-            </CurrentStatus>
-          </div>
-        </div>
+    <div className="flex">
+      <Header />
 
-        {currentTodo.is_completed ? (
-          <IsCompeletedButton
-            className="badge badge-primary mr-2"
-            onClick={() => updateIsCompleted(currentTodo)}
-          >
-            未完了
-          </IsCompeletedButton>
-        ) : (
-          <IsCompeletedButton
-            className="badge badge-primary mr-2"
-            onClick={() => updateIsCompleted(currentTodo)}
-          >
-            完了
-          </IsCompeletedButton>
-        )}
-        <EditButton type="submit" onClick={updateTodo}>
-          更新
-        </EditButton>
-        <DeleteButton className="badge badge-danger mr-2" onClick={deleteTodo}>
-          削除
-        </DeleteButton>
+      <div className="max-w-7xl m-auto mt-10">
+        <p className="text-3xl font-bold">ニュースを編集する</p>
+        <div>
+          <div className="my-4">
+            <Breadcrumbs>{items}</Breadcrumbs>
+          </div>
+          <div>
+            <label htmlFor="name">現在のニュースタイトル</label>
+
+            <Input
+              type="text"
+              id="name"
+              name="name"
+              value={currentTodo.name}
+              onChange={handleInputChange}
+            />
+
+            <div>
+              <span>カテゴリ</span>
+              <br />
+              <CurrentStatus>
+                {currentTodo.is_completed ? "お知らせ" : "イベント"}
+              </CurrentStatus>
+            </div>
+          </div>
+
+          <span className="m-4">
+            <Button variant="outline" color="cyan" onClick={updateTodo}>
+              更新
+            </Button>
+          </span>
+          <span className="m-4">
+            <Button variant="outline" color="cyan" onClick={deleteTodo}>
+              削除
+            </Button>
+          </span>
+        </div>
       </div>
     </div>
   );

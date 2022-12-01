@@ -86,9 +86,22 @@ const IndexPage: React.FC = () => {
       <div className="max-w-7xl m-auto mt-10">
         <h2 className="text-2xl text-center">Clubmemo</h2>
         <p className="m-6">
-          Clubmemoでは、部員管理やサークルの情報管理を楽に行えます。
+          Clubmemoでは、大学の部活や中学校、高校の部員管理や情報管理を楽に行えます。
         </p>
-        <p className="text-center">
+
+        <p className="text-center my-2">
+          <Button variant="outline" color="cyan" className="text-center m-auto">
+            <Link to="register">新規登録する</Link>
+          </Button>
+        </p>
+
+        <p className="text-center my-2">
+          <Button variant="outline" color="cyan" className="text-center m-auto">
+            <Link to="login">ログインする</Link>
+          </Button>
+        </p>
+
+        <p className="text-center my-2">
           <Button variant="outline" color="cyan" className="text-center m-auto">
             <Link to="member/new">メンバー登録をする</Link>
           </Button>
@@ -274,36 +287,40 @@ const IndexPage: React.FC = () => {
                               </Input.Wrapper>
                             </div>
                             <span className="m-2">
-                              <Button
-                                variant="outline"
-                                color="cyan"
-                                onClick={() =>
-                                  updateMember({
-                                    variables: {
-                                      id: member.id,
-                                      params: {
-                                        profilepic: "aaaa",
-                                        fullname: fullname,
-                                        hurigana: hurigana,
-                                        department: department,
-                                        grade: grade,
-                                        gender: gender,
-                                        birthday: birthday,
-                                        admin: admin,
+                              <span className="my-2">
+                                <Button
+                                  variant="outline"
+                                  color="cyan"
+                                  onClick={() =>
+                                    updateMember({
+                                      variables: {
+                                        id: member.id,
+                                        params: {
+                                          profilepic: "aaaa",
+                                          fullname: fullname,
+                                          hurigana: hurigana,
+                                          department: department,
+                                          grade: grade,
+                                          gender: gender,
+                                          birthday: birthday,
+                                          admin: admin,
+                                        },
                                       },
-                                    },
-                                  })
-                                }
-                              >
-                                プロフィールを更新する
-                              </Button>
-                              <Button
-                                variant="outline"
-                                color="cyan"
-                                onClick={move}
-                              >
-                                編集を終了する
-                              </Button>
+                                    })
+                                  }
+                                >
+                                  プロフィールを更新する
+                                </Button>
+                              </span>
+                              <span className="m-2">
+                                <Button
+                                  variant="outline"
+                                  color="cyan"
+                                  onClick={move}
+                                >
+                                  編集を終了する
+                                </Button>
+                              </span>
                             </span>
                           </>
                         )}

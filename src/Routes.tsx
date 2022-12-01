@@ -12,6 +12,8 @@ import AddPost from "./pages/_AddPost";
 import AddMember from "./pages/AddMember";
 import AboutPage from "./pages/AboutPage";
 import AddClub from "./pages/AddClub";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 const Routers = () => {
   return (
@@ -30,6 +32,8 @@ const Routers = () => {
         <Route path="/resas" element={<Resas />} />
         <Route path="/posts/new" element={<AddPost />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

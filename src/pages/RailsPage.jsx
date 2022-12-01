@@ -10,6 +10,7 @@ import { usePost } from "./fetch/usePost";
 import { apiKey } from "../components/env";
 import { Breadcrumbs, Anchor } from "@mantine/core";
 import { Input, Button } from "@mantine/core";
+import { Timeline, Text } from "@mantine/core";
 
 const SearchAndButtton = styled.div`
   display: flex;
@@ -144,16 +145,15 @@ const RailsPage = () => {
         <Button variant="outline" color="cyan">
           <Link to="/todos/new">ニュースを作成する</Link>
         </Button>
-
-        <SearchAndButtton>
-          <SearchForm
-            type="text"
+        <div className="my-4">
+          <Input
+            type="search"
             placeholder="ニュースを探す"
             onChange={(event) => {
               setSearchName(event.target.value);
             }}
           />
-        </SearchAndButtton>
+        </div>
         <p className="my-4">合計：{data.length}件</p>
         <div>
           {data
@@ -170,29 +170,23 @@ const RailsPage = () => {
             })
             .map((val, key) => {
               return (
-                <Row key={key}>
-                  {/* {val.is_completed ? (
-                    <CheckedBox>
-                      <ImCheckboxChecked
-                        onClick={() => updateIsCompleted(key, val)}
-                      />
-                    </CheckedBox>
-                  ) : (
-                    <UncheckedBox>
-                      <ImCheckboxUnchecked
-                        onClick={() => updateIsCompleted(key, val)}
-                      />
-                    </UncheckedBox>
-                  )} */}
-                  <TodoName is_completed={val.is_completed}>
-                    {val.name}
-                  </TodoName>
-                  <Link to={val.id + "/edit"} component={<EditTodo />}>
-                    <EditButton>
-                      <AiFillEdit />
-                    </EditButton>
-                  </Link>
-                </Row>
+                <div className="my-4" key={key}>
+                  <Timeline active={1} bulletSize={24} lineWidth={2}>
+                    <Timeline.Item title="">
+                      {val.name}
+                      <Text color="dimmed" size="sm">
+                        <Link to={val.id + "/edit"} component={<EditTodo />}>
+                          <Text variant="link" component="span" inherit>
+                            詳しくはこちら
+                          </Text>{" "}
+                        </Link>
+                      </Text>
+                      <Text size="xs" mt={4}>
+                        {val.created_at}
+                      </Text>
+                    </Timeline.Item>
+                  </Timeline>
+                </div>
               );
             })}
         </div>
