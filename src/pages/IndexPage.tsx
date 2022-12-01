@@ -23,6 +23,7 @@ import {
   CiCalendarDate,
 } from "react-icons/ci";
 import { Oval } from "react-loader-spinner";
+import { Center } from "@mantine/core";
 
 const IndexPage: React.FC = () => {
   const notify = () => toast("記事投稿ができました！");
@@ -92,24 +93,25 @@ const IndexPage: React.FC = () => {
             <Link to="member/new">メンバー登録をする</Link>
           </Button>
         </p>
+
         <h2 className="text-2xl font-bold m-6 text-center">
           メンバー一覧 {members.length}人
         </h2>
         {members && members.length == 0 && (
-          <p className="text-center my-6 m-auto">
+          <Center>
             <Oval
               height={80}
               width={80}
               color="#4fa94d"
               wrapperStyle={{}}
-              wrapperClass=""
+              wrapperClass="margin: 0 auto;"
               visible={true}
               ariaLabel="oval-loading"
               secondaryColor="#4fa94d"
               strokeWidth={2}
               strokeWidthSecondary={2}
             />
-          </p>
+          </Center>
         )}
         <Grid>
           {members &&
