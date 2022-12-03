@@ -14,6 +14,7 @@ import AboutPage from "./pages/AboutPage";
 import AddClub from "./pages/AddClub";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ClubIndex from "./pages/ClubIndex";
 
 const Routers = () => {
   return (
@@ -34,6 +35,7 @@ const Routers = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/club" element={<ClubIndex />} />
       </Routes>
     </BrowserRouter>
   );

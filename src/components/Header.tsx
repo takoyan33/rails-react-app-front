@@ -57,7 +57,7 @@ const mockdata = [
   { icon: <AiFillEdit />, label: "メンバー登録", href: "/member/new" },
   { icon: <AiFillFile />, label: "ニュース", href: "/todos" },
   { icon: <AiFillQuestionCircle />, label: "About", href: "/about" },
-  { icon: <AiFillInfoCircle />, label: "サークルについて", href: "/" },
+  { icon: <AiFillInfoCircle />, label: "サークルについて", href: "/club" },
   // { label: "Security" },
   // { label: "Settings" },
 ];

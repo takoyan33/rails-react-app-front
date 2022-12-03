@@ -9,6 +9,8 @@ import { apiKey } from "../components/env";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import { Breadcrumbs, Anchor } from "@mantine/core";
 import { Input, Button } from "@mantine/core";
+import { Oval } from "react-loader-spinner";
+import { Center } from "@mantine/core";
 
 const items = [
   { title: "トップページ", href: "/" },

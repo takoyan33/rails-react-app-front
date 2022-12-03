@@ -11,6 +11,8 @@ import { apiKey } from "../components/env";
 import { Breadcrumbs, Anchor } from "@mantine/core";
 import { Input, Button } from "@mantine/core";
 import { Timeline, Text } from "@mantine/core";
+import { Oval } from "react-loader-spinner";
+import { Center } from "@mantine/core";
 
 const SearchAndButtton = styled.div`
   display: flex;
@@ -91,7 +93,25 @@ const RailsPage = () => {
   const [todos, setTodos] = useState([]);
   const [searchName, setSearchName] = useState("");
   const { data, isLoading, isError } = usePost();
-  if (isLoading) return <p className="text-center mt-10">読み込み中</p>;
+  if (isLoading)
+    return (
+      <div className="mt-20">
+        <Center>
+          <Oval
+            height={80}
+            width={80}
+            color="#4fa94d"
+            wrapperStyle={{}}
+            wrapperClass="margin: 0 auto;"
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#4fa94d"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </Center>
+      </div>
+    );
   if (isError)
     return (
       <p className="text-center mt-10">{isError.message}エラーが出ました</p>
@@ -113,22 +133,22 @@ const RailsPage = () => {
     }
   };
 
-  const updateIsCompleted = (index, val) => {
-    //引数を２つ取る
-    var data = {
-      id: val.id,
-      name: val.name,
-      is_completed: !val.is_completed,
-      //値が反転する true→false
-    };
-    axios.patch(`${apiKey}/${val.id}`, data).then((resp) => {
-      const newTodos = [...todos];
-      //スプレッド構文で開ける
-      newTodos[index].is_completed = resp.data.is_completed;
-      //番号を指定する
-      setTodos(newTodos);
-    });
-  };
+  // const updateIsCompleted = (index, val) => {
+  //   //引数を２つ取る
+  //   var data = {
+  //     id: val.id,
+  //     name: val.name,
+  //     is_completed: !val.is_completed,
+  //     //値が反転する true→false
+  //   };
+  //   axios.patch(`${apiKey}/${val.id}`, data).then((resp) => {
+  //     const newTodos = [...todos];
+  //     //スプレッド構文で開ける
+  //     newTodos[index].is_completed = resp.data.is_completed;
+  //     //番号を指定する
+  //     setTodos(newTodos);
+  //   });
+  // };
 
   console.log(apiKey);
 
