@@ -14,49 +14,49 @@ import { Center } from "@mantine/core";
 
 const items = [
   { title: "トップページ", href: "/" },
-  { title: "ニュース一覧", href: "/todos/" },
-  { title: "ニュース投稿", href: "/todos/new" },
+  { title: "ニュース一覧", href: "/news/" },
+  { title: "ニュース投稿", href: "/news/new" },
 ].map((item, index) => (
   <Anchor href={item.href} key={index}>
     <Link to={item.href}>{item.title}</Link>
   </Anchor>
 ));
 
-function AddTodo(props: any) {
-  const initialTodoState = {
+function AddNews(props: any) {
+  const initialNewsState = {
     id: null,
-    name: "",
-    is_completed: false,
+    title: "",
+    body: "aaa",
   };
 
   console.log(props);
 
-  const [todo, setTodo] = useState(initialTodoState);
+  const [news, setNews] = useState(initialNewsState);
   const navigate = useNavigate();
-  // const railsurl = "https://rails-react-app-backend.herokuapp.com/api/v1/todos";
+  // const railsurl = "https://rails-react-app-backend.herokuapp.com/api/v1/Newss";
 
   const handleInputChange = (event: any) => {
-    const { name, value } = event.target;
-    setTodo({ ...todo, [name]: value });
+    const { title, value } = event.target;
+    setNews({ ...news, [title]: value });
+    console.log(news);
   };
 
-  const saveTodo = () => {
+  const saveNews = () => {
     var data = {
-      name: todo.name,
+      title: news.title,
+      body: news.body,
     };
-
     console.log(apiKey);
-
     axios
       .post(apiKey, data)
       .then((resp) => {
-        setTodo({
+        setNews({
           id: resp.data.id,
-          name: resp.data.name,
-          is_completed: resp.data.is_completed,
+          title: resp.data.title,
+          body: resp.data.body,
         });
         alert("追加しました");
-        navigate("/todos");
+        navigate("/newss");
       })
       .catch((e) => {
         console.log(e);
@@ -83,17 +83,17 @@ function AddTodo(props: any) {
           <Input
             type="text"
             required
-            value={todo.name}
+            value={news.title}
             onChange={handleInputChange}
-            name="name"
+            title="title"
           />
         </Input.Wrapper>
         <div className="my-4">
           <Button
             variant="outline"
             color="cyan"
-            onClick={saveTodo}
-            disabled={!todo.name || /^\s*$/.test(todo.name)}
+            onClick={saveNews}
+            disabled={!news.title || /^\s*$/.test(news.title)}
           >
             投稿する
           </Button>
@@ -103,4 +103,4 @@ function AddTodo(props: any) {
   );
 }
 
-export default AddTodo;
+export default AddNews;

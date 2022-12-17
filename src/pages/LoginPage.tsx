@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import Cookies from "js-cookie";
 import axios from "axios";
 import styled from "styled-components";
 import { Header } from "../components/Header";
@@ -18,6 +19,8 @@ import {
   CiAt,
   CiCalendarDate,
 } from "react-icons/ci";
+import { AuthContext } from "../Routes";
+import { signIn } from "../lib/api/auth";
 
 const items = [
   { title: "トップページ", href: "/" },
@@ -42,7 +45,65 @@ function AddClub() {
   const [department, setDepartment] = useState("");
   const [birthday, setBirthday] = useState("");
   const [admin, setAdmin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
+  const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
+
+  // const baseURL = "http://localhost:4000/api/v1/auth/sign_in";
+
+  // const loginclub = () => {
+  //   axios
+  //     .post(baseURL, {
+  //       email: email,
+  //       password: password,
+  //     })
+  //     .then((response) => {
+  //       // ログインに成功した場合はCookieに各値を格納
+  //       Cookies.set("_access_token", response.headers["access-token"]);
+  //       Cookies.set("_client", response.headers["client"]);
+  //       Cookies.set("_uid", response.headers["uid"]);
+  //       setIsSignedIn(true);
+  //       setCurrentUser(response.data.data);
+  //       alert("ログインしました");
+  //       navigate("/");
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // };
+
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const params = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      const res = await signIn(params);
+      console.log(res);
+
+      if (res.status === 200) {
+        // ログインに成功した場合はCookieに各値を格納
+        Cookies.set("_access_token", res.headers["access-token"]);
+        Cookies.set("_client", res.headers["client"]);
+        Cookies.set("_uid", res.headers["uid"]);
+        setCurrentUser(res.data.data);
+        console.log("Signed in successfully!");
+        setIsSignedIn(true);
+        navigate("/");
+      } else {
+        setAlertMessageOpen(true);
+      }
+      
+    } catch (err) {
+      console.log(err);
+      setAlertMessageOpen(true);
+    }
+  };
 
   return (
     <div className="flex">
@@ -66,8 +127,8 @@ function AddClub() {
               icon={<CiAt />}
               placeholder="メールアドレス"
               type="email"
-              value={fullname}
-              onChange={(e) => setFullname(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Input.Wrapper>
         </div>
@@ -84,41 +145,14 @@ function AddClub() {
               icon={<CiAt />}
               placeholder="パスワード"
               type="password"
-              value={hurigana}
-              onChange={(e) => setHurigana(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Input.Wrapper>
         </div>
 
         <div className="my-4 text-center m-auto">
-          <Button
-            variant="outline"
-            color="cyan"
-            onClick={() => {
-              createMember({
-                variables: {
-                  params: {
-                    profilepic: "aaa",
-                    fullname: fullname,
-                    hurigana: hurigana,
-                    department: department,
-                    grade: grade,
-                    gender: gender,
-                    birthday: birthday,
-                    admin: admin,
-                  },
-                },
-              });
-              notify();
-              setFullname("");
-              setHurigana("");
-              setGrade("");
-              setGender("");
-              setDepartment("");
-              setBirthday("");
-              navigate("/");
-            }}
-          >
+          <Button variant="outline" color="cyan" onClick={handleSubmit}>
             ログインする
           </Button>
         </div>

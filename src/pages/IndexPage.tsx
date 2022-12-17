@@ -24,6 +24,8 @@ import {
 } from "react-icons/ci";
 import { Oval } from "react-loader-spinner";
 import { Center } from "@mantine/core";
+import { AuthContext } from "../Routes";
+import React, { useContext } from "react";
 
 const IndexPage: React.FC = () => {
   const notify = () => toast("記事投稿ができました！");
@@ -75,14 +77,26 @@ const IndexPage: React.FC = () => {
     setAdmin(admin);
     setIsUpdate(true);
   };
-
+  const { isSignedIn, currentUser } = useContext(AuthContext);
   return (
     <div className="flex">
       <Header />
+
       {/* <Dark /> */}
       {/* <p className="text-3xl font-bold m-auto w-30">
         <img src={apizukan} className="m-auto w-40 my-6"></img>
       </p> */}
+
+      {isSignedIn && currentUser ? (
+        <>
+          <h1>Signed in successfully!</h1>
+          <h2>Email: {currentUser?.email}</h2>
+          <h2>Name: {currentUser?.name}</h2>
+        </>
+      ) : (
+        <h1>Not signed in</h1>
+      )}
+
       <div className="max-w-7xl m-auto mt-10">
         <h2 className="text-2xl text-center">Clubmemo</h2>
         <p className="m-6">

@@ -8,56 +8,15 @@ import { Breadcrumbs, Anchor } from "@mantine/core";
 import { Link, Router } from "react-router-dom";
 import { Input, Button } from "@mantine/core";
 
-const InputName = styled.input`
-  font-size: 20px;
-  width: 100%;
-  height: 40px;
-  padding: 2px 7px;
-  margin: 12px 0;
-`;
-
 const CurrentStatus = styled.div`
   font-size: 19px;
   margin: 8px 0 12px 0;
   font-weight: bold;
 `;
 
-const IsCompeletedButton = styled.button`
-  color: #fff;
-  font-weight: 500;
-  font-size: 17px;
-  padding: 5px 10px;
-  background: #f2a115;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-`;
-
-const EditButton = styled.button`
-  color: white;
-  font-weight: 500;
-  font-size: 17px;
-  padding: 5px 10px;
-  margin: 0 10px;
-  background: #0ac620;
-  border-radius: 3px;
-  border: none;
-`;
-
-const DeleteButton = styled.button`
-  color: #fff;
-  font-size: 17px;
-  font-weight: 500;
-  padding: 5px 10px;
-  background: #f54242;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-`;
-
 const items = [
   { title: "トップページ", href: "/" },
-  { title: "ニュース一覧", href: "/todos/" },
+  { title: "ニュース一覧", href: "/news/" },
   { title: "ニュース投稿", href: "/news/new" },
 ].map((item, index) => (
   <Anchor href={item.href} key={index}>
@@ -66,13 +25,12 @@ const items = [
 ));
 
 function EditTodo(props: any) {
-  const initialTodoState = {
+  const initialNewsState = {
     id: null,
-    name: "",
-    is_completed: false,
+    title: "",
+    body: "",
   };
-
-  const [currentTodo, setCurrentTodo] = useState(initialTodoState);
+  const [currentTodo, setCurrentTodo] = useState(initialNewsState);
   const [ID, setID] = useState("");
   const navigate = useNavigate();
 
@@ -95,19 +53,19 @@ function EditTodo(props: any) {
     getTodo(id);
   }, []);
 
-  console.log(currentTodo.name);
+  console.log(currentTodo.title);
   console.log(currentTodo);
 
   const handleInputChange = (event: any) => {
-    const { name, value } = event.target;
-    setCurrentTodo({ ...currentTodo, [name]: value });
+    const { title, value } = event.target;
+    setCurrentTodo({ ...currentTodo, [title]: value });
     //currenttodoのnameをセットする
   };
 
   const updateIsCompleted = (val: any) => {
     var data = {
       id: val.id,
-      name: val.name,
+      title: val.title,
       is_completed: !val.is_completed,
     };
     axios.patch(`${apiKey}/${val.id}`, data).then((resp) => {
@@ -161,17 +119,17 @@ function EditTodo(props: any) {
             <Input
               type="text"
               id="name"
-              name="name"
-              value={currentTodo.name}
+              name="title"
+              value={currentTodo.title}
               onChange={handleInputChange}
             />
 
             <div>
               <span>カテゴリ</span>
               <br />
-              <CurrentStatus>
+              {/* <CurrentStatus>
                 {currentTodo.is_completed ? "お知らせ" : "イベント"}
-              </CurrentStatus>
+              </CurrentStatus> */}
             </div>
           </div>
 

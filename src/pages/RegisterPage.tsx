@@ -30,11 +30,11 @@ const items = [
 
 function AddClub() {
   const notify = () => toast("メンバー登録できました！");
-  const [createMember] = useCreateMemberMutation({
-    refetchQueries: ["members"],
-  });
-  const { data: { members = [] } = {} } = useMembersQuery();
-  console.log(members);
+  // const [createMember] = useCreateMemberMutation({
+  //   refetchQueries: ["members"],
+  // });
+  // const { data: { members = [] } = {} } = useMembersQuery();
+  // console.log(members);
   const [fullname, setFullname] = useState("");
   const [hurigana, setHurigana] = useState("");
   const [grade, setGrade] = useState("");
@@ -42,7 +42,27 @@ function AddClub() {
   const [department, setDepartment] = useState("");
   const [birthday, setBirthday] = useState("");
   const [admin, setAdmin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const baseURL = "http://localhost:4000/api/v1/auth/";
+
+  const saveclub = () => {
+    axios
+      .post(baseURL, {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        alert("登録しました");
+        
+        navigate("/");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   return (
     <div className="flex">
@@ -54,7 +74,7 @@ function AddClub() {
           <Breadcrumbs>{items}</Breadcrumbs>
         </div>
 
-        <div className="my-4">
+        {/* <div className="my-4">
           <Input.Wrapper
             id="input-demo"
             withAsterisk
@@ -166,7 +186,7 @@ function AddClub() {
               onChange={(e) => setBirthday(e.target.value)}
             />
           </Input.Wrapper>
-        </div>
+        </div> */}
 
         <div className="my-4">
           <Input.Wrapper
@@ -180,8 +200,8 @@ function AddClub() {
               icon={<CiCalendarDate />}
               placeholder="メールアドレス"
               type="email"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Input.Wrapper>
         </div>
@@ -198,41 +218,14 @@ function AddClub() {
               icon={<CiCalendarDate />}
               placeholder="パスワード"
               type="password"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Input.Wrapper>
         </div>
 
         <div className="my-4 text-center m-auto">
-          <Button
-            variant="outline"
-            color="cyan"
-            onClick={() => {
-              createMember({
-                variables: {
-                  params: {
-                    profilepic: "aaa",
-                    fullname: fullname,
-                    hurigana: hurigana,
-                    department: department,
-                    grade: grade,
-                    gender: gender,
-                    birthday: birthday,
-                    admin: admin,
-                  },
-                },
-              });
-              notify();
-              setFullname("");
-              setHurigana("");
-              setGrade("");
-              setGender("");
-              setDepartment("");
-              setBirthday("");
-              navigate("/");
-            }}
-          >
+          <Button variant="outline" color="cyan" onClick={saveclub}>
             登録する
           </Button>
         </div>
