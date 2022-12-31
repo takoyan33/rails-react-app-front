@@ -55,7 +55,7 @@ const useStyles = createStyles((theme) => ({
 const mockdata = [
   { icon: <AiFillHome />, label: "TOP", href: "/" },
   { icon: <AiFillEdit />, label: "メンバー登録", href: "/member/new" },
-  { icon: <AiFillFile />, label: "ニュース", href: "/todos" },
+  { icon: <AiFillFile />, label: "ニュース", href: "/news" },
   { icon: <AiFillQuestionCircle />, label: "About", href: "/about" },
   { icon: <AiFillInfoCircle />, label: "サークルについて", href: "/club" },
   // { label: "Security" },

@@ -1,23 +1,15 @@
-import React, { useState } from "react";
-import axios from "axios";
-import styled from "styled-components";
+import React, { useState, useContext } from "react";
 import { Header } from "../components/Header";
-import { Link, Router } from "react-router-dom";
-import { FiSend } from "react-icons/fi";
-import { Routes, Route, useParams, useNavigate } from "react-router-dom";
-import { useMembersQuery, useCreateMemberMutation } from "../graphql/generated";
-import TextField from "@mui/material/TextField";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input, Button } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
-import {
-  CiFaceSmile,
-  CiUser,
-  CiHome,
-  CiAt,
-  CiCalendarDate,
-} from "react-icons/ci";
+import { CiCalendarDate } from "react-icons/ci";
+import { AuthContext } from "../Routes";
+import { signUp } from "../lib/api/auth";
+import Cookies from "js-cookie";
 
 const items = [
   { title: "トップページ", href: "/" },
@@ -30,38 +22,49 @@ const items = [
 
 function AddClub() {
   const notify = () => toast("メンバー登録できました！");
-  // const [createMember] = useCreateMemberMutation({
-  //   refetchQueries: ["members"],
-  // });
-  // const { data: { members = [] } = {} } = useMembersQuery();
-  // console.log(members);
-  const [fullname, setFullname] = useState("");
-  const [hurigana, setHurigana] = useState("");
-  const [grade, setGrade] = useState("");
-  const [gender, setGender] = useState("");
-  const [department, setDepartment] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [admin, setAdmin] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:4000/api/v1/auth/";
+  const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
 
-  const saveclub = () => {
-    axios
-      .post(baseURL, {
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        alert("登録しました");
-        
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
+  const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
+
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const params = {
+      name: name,
+      email: email,
+      password: password,
+      passwordConfirmation: passwordConfirmation,
+    };
+
+    try {
+      const res = await signUp(params);
+      console.log(res);
+
+      if (res.status === 200) {
+        // アカウント作成と同時にログインさせてしまう
+        // 本来であればメール確認などを挟むべきだが、今回はサンプルなので
+        Cookies.set("_access_token", res.headers["access-token"]);
+        Cookies.set("_client", res.headers["client"]);
+        Cookies.set("_uid", res.headers["uid"]);
+
+        setIsSignedIn(true);
+        setCurrentUser(res.data.data);
         navigate("/");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+
+        console.log("Signed in successfully!");
+      } else {
+        setAlertMessageOpen(true);
+      }
+    } catch (err) {
+      console.log(err);
+      setAlertMessageOpen(true);
+    }
   };
 
   return (
@@ -73,120 +76,6 @@ function AddClub() {
         <div className="my-4">
           <Breadcrumbs>{items}</Breadcrumbs>
         </div>
-
-        {/* <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="名前"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiAt />}
-              placeholder="名前"
-              value={fullname}
-              onChange={(e) => setFullname(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="種類"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiAt />}
-              placeholder="高校の部活、大学のサークル"
-              value={hurigana}
-              onChange={(e) => setHurigana(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="学年"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiFaceSmile />}
-              placeholder="学年"
-              value={grade}
-              onChange={(e) => setGrade(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="概要"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiUser />}
-              placeholder="概要"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="顧問の先生"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiUser />}
-              placeholder="顧問の先生"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="活動日"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiHome />}
-              placeholder="活動日"
-              value={department}
-              onChange={(e) => setDepartment(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div>
-        <div className="my-4">
-          <Input.Wrapper
-            id="input-demo"
-            withAsterisk
-            label="設立年"
-            description=""
-            error=""
-          >
-            <Input
-              icon={<CiCalendarDate />}
-              placeholder="設立年"
-              type="date"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
-            />
-          </Input.Wrapper>
-        </div> */}
 
         <div className="my-4">
           <Input.Wrapper
@@ -224,8 +113,26 @@ function AddClub() {
           </Input.Wrapper>
         </div>
 
+        <div className="my-4">
+          <Input.Wrapper
+            id="input-demo"
+            withAsterisk
+            label="パスワード確認用"
+            description=""
+            error=""
+          >
+            <Input
+              icon={<CiCalendarDate />}
+              placeholder="パスワード確認用"
+              type="password"
+              value={passwordConfirmation}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
+            />
+          </Input.Wrapper>
+        </div>
+
         <div className="my-4 text-center m-auto">
-          <Button variant="outline" color="cyan" onClick={saveclub}>
+          <Button variant="outline" color="cyan" onClick={handleSubmit}>
             登録する
           </Button>
         </div>

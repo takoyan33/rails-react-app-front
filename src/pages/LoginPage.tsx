@@ -1,24 +1,14 @@
 import React, { useState, useContext } from "react";
 import Cookies from "js-cookie";
-import axios from "axios";
-import styled from "styled-components";
 import { Header } from "../components/Header";
 import { Link, Router } from "react-router-dom";
-import { FiSend } from "react-icons/fi";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import { useMembersQuery, useCreateMemberMutation } from "../graphql/generated";
-import TextField from "@mui/material/TextField";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input, Button } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
-import {
-  CiFaceSmile,
-  CiUser,
-  CiHome,
-  CiAt,
-  CiCalendarDate,
-} from "react-icons/ci";
+import { CiAt } from "react-icons/ci";
 import { AuthContext } from "../Routes";
 import { signIn } from "../lib/api/auth";
 
@@ -51,29 +41,6 @@ function AddClub() {
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
 
-  // const baseURL = "http://localhost:4000/api/v1/auth/sign_in";
-
-  // const loginclub = () => {
-  //   axios
-  //     .post(baseURL, {
-  //       email: email,
-  //       password: password,
-  //     })
-  //     .then((response) => {
-  //       // ログインに成功した場合はCookieに各値を格納
-  //       Cookies.set("_access_token", response.headers["access-token"]);
-  //       Cookies.set("_client", response.headers["client"]);
-  //       Cookies.set("_uid", response.headers["uid"]);
-  //       setIsSignedIn(true);
-  //       setCurrentUser(response.data.data);
-  //       alert("ログインしました");
-  //       navigate("/");
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // };
-
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
@@ -98,7 +65,6 @@ function AddClub() {
       } else {
         setAlertMessageOpen(true);
       }
-      
     } catch (err) {
       console.log(err);
       setAlertMessageOpen(true);

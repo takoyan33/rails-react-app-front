@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import Dark from "../components/Darkmode";
 import apizukan from "../assets/apizukan.png";
 import TextField from "@mui/material/TextField";
@@ -26,6 +27,7 @@ import { Oval } from "react-loader-spinner";
 import { Center } from "@mantine/core";
 import { AuthContext } from "../Routes";
 import React, { useContext } from "react";
+import { signOut } from "../lib/api/auth";
 
 const IndexPage: React.FC = () => {
   const notify = () => toast("記事投稿ができました！");
@@ -45,6 +47,30 @@ const IndexPage: React.FC = () => {
   const [birthday, setBirthdaye] = useState("");
   const [admin, setAdmin] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
+  const { loading, setIsSignedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      const res = await signOut();
+
+      if (res.data.success === true) {
+        // サインアウト時には各Cookieを削除
+        Cookies.remove("_access_token");
+        Cookies.remove("_client");
+        Cookies.remove("_uid");
+
+        setIsSignedIn(false);
+        navigate("/");
+
+        console.log("Succeeded in sign out");
+      } else {
+        console.log("Failed in sign out");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleCheckboxClick = useMemo(() => {
     console.log("function generated in MyCheckbox");
@@ -87,18 +113,27 @@ const IndexPage: React.FC = () => {
         <img src={apizukan} className="m-auto w-40 my-6"></img>
       </p> */}
 
-      {isSignedIn && currentUser ? (
-        <>
-          <h1>Signed in successfully!</h1>
-          <h2>Email: {currentUser?.email}</h2>
-          <h2>Name: {currentUser?.name}</h2>
-        </>
-      ) : (
-        <h1>Not signed in</h1>
-      )}
-
       <div className="max-w-7xl m-auto mt-10">
         <h2 className="text-2xl text-center">Clubmemo</h2>
+
+        {isSignedIn && currentUser ? (
+          <>
+            <h1>Signed in successfully!</h1>
+            <h2>Email: {currentUser?.email}</h2>
+            <h2>Name: {currentUser?.name}</h2>
+            <Button
+              variant="outline"
+              color="cyan"
+              className="text-center m-auto"
+              onClick={handleSignOut}
+            >
+              ログアウトする
+            </Button>
+          </>
+        ) : (
+          <h1>ログインしていません</h1>
+        )}
+
         <p className="m-6">
           Clubmemoでは、大学の部活や中学校、高校の部員管理や情報管理を楽に行えます。
         </p>
