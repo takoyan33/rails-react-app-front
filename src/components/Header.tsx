@@ -1,8 +1,10 @@
-import { PageHeader } from "antd";
+import { Card, Image, Text, Checkbox, Input, Button } from "@mantine/core";
 import "antd/dist/antd.css";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import { useState } from "react";
+import { AuthContext } from "../Routes";
 import {
   Navbar,
   Center,
@@ -18,6 +20,7 @@ import {
   AiFillQuestionCircle,
   AiFillInfoCircle,
 } from "react-icons/ai";
+import { signOut } from "../lib/api/auth";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -54,12 +57,11 @@ const useStyles = createStyles((theme) => ({
 
 const mockdata = [
   { icon: <AiFillHome />, label: "TOP", href: "/" },
-  { icon: <AiFillEdit />, label: "メンバー登録", href: "/member/new" },
   { icon: <AiFillFile />, label: "ニュース", href: "/news" },
   { icon: <AiFillQuestionCircle />, label: "About", href: "/about" },
   { icon: <AiFillInfoCircle />, label: "サークルについて", href: "/club" },
-  // { label: "Security" },
-  // { label: "Settings" },
+  // { icon: <AiFillFile />, label: "新規登録", href: "/register" },
+  // { icon: <AiFillHome />, label: "ログイン", href: "/login" },
 ];
 
 interface NavbarLinkProps {
@@ -72,6 +74,7 @@ interface NavbarLinkProps {
 
 function NavbarLink({ icon, label, active, onClick, href }: NavbarLinkProps) {
   const { classes, cx } = useStyles();
+
   return (
     <Tooltip label={label} position="right" transitionDuration={0}>
       <Link to={href}>
@@ -87,7 +90,32 @@ function NavbarLink({ icon, label, active, onClick, href }: NavbarLinkProps) {
 }
 
 export const Header = () => {
+  const { classes, cx } = useStyles();
+  const { isSignedIn, currentUser } = useContext(AuthContext);
   const [active, setActive] = useState(2);
+  const navigate = useNavigate();
+  const { loading, setIsSignedIn } = useContext(AuthContext);
+  const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      const res = await signOut();
+
+      if (res.data.success === true) {
+        // サインアウト時には各Cookieを削除
+        Cookies.remove("_access_token");
+        Cookies.remove("_client");
+        Cookies.remove("_uid");
+
+        setIsSignedIn(false);
+        navigate("/");
+
+        console.log("Succeeded in sign out");
+      } else {
+        console.log("Failed in sign out");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const links = mockdata.map((link, index, icon) => (
     <NavbarLink
@@ -105,6 +133,33 @@ export const Header = () => {
           <Stack justify="center" spacing={0}>
             {links}
           </Stack>
+          {isSignedIn && (
+            <>
+              <Tooltip
+                label="メンバー登録"
+                position="right"
+                transitionDuration={0}
+              >
+                <Link to={"/member/new"}>
+                  <UnstyledButton className={cx(classes.link)}>
+                    <AiFillEdit />
+                  </UnstyledButton>
+                </Link>
+              </Tooltip>
+              <Tooltip
+                label="ログアウト"
+                position="right"
+                transitionDuration={0}
+              >
+                <UnstyledButton
+                  onClick={handleSignOut}
+                  className={cx(classes.link)}
+                >
+                  <AiFillEdit />
+                </UnstyledButton>
+              </Tooltip>
+            </>
+          )}
         </Navbar.Section>
       </Navbar>
     </>

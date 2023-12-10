@@ -25,7 +25,7 @@ const items = [
 function AddNews(props: any) {
   const initialNewsState = {
     id: null,
-    title: "",
+    title: "aaaa",
     body: "aaa",
   };
 
@@ -43,10 +43,12 @@ function AddNews(props: any) {
 
   const saveNews = () => {
     var data = {
-      title: news.title,
-      body: news.body,
+      news: {
+        title: news.title,
+        body: news.body,
+      },
     };
-    console.log(apiKey);
+    console.log(data);
     axios
       .post(apiKey, data)
       .then((resp) => {
@@ -56,10 +58,11 @@ function AddNews(props: any) {
           body: resp.data.body,
         });
         alert("追加しました");
-        navigate("/newss");
+        navigate("/news");
       })
       .catch((e) => {
         console.log(e);
+        alert("投稿に失敗しました");
       });
   };
 

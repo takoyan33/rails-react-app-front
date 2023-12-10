@@ -24,13 +24,15 @@ const items = [
   </Anchor>
 ));
 
-function EditTodo(props: any) {
+function EditNews(props: any) {
   const initialNewsState = {
-    id: null,
-    title: "",
-    body: "",
+    news: {
+      id: null,
+      title: "",
+      body: "",
+    },
   };
-  const [currentTodo, setCurrentTodo] = useState(initialNewsState);
+  const [currentNews, setCurrentNews] = useState(initialNewsState);
   const [ID, setID] = useState("");
   const navigate = useNavigate();
 
@@ -38,11 +40,11 @@ function EditTodo(props: any) {
   console.log(id);
   console.log(`${apiKey}/${id}`);
 
-  const getTodo = (id) => {
+  const getNews = (id) => {
     axios
       .get(`${apiKey}/${id}`)
       .then((resp) => {
-        setCurrentTodo(resp.data);
+        setCurrentNews(resp.data);
       })
       .catch((e) => {
         console.log(e);
@@ -50,15 +52,12 @@ function EditTodo(props: any) {
   };
 
   useEffect(() => {
-    getTodo(id);
+    getNews(id);
   }, []);
-
-  console.log(currentTodo.title);
-  console.log(currentTodo);
 
   const handleInputChange = (event: any) => {
     const { title, value } = event.target;
-    setCurrentTodo({ ...currentTodo, [title]: value });
+    setCurrentNews({ ...currentNews, [title]: value });
     //currenttodoのnameをセットする
   };
 
@@ -70,28 +69,28 @@ function EditTodo(props: any) {
     };
     axios.patch(`${apiKey}/${val.id}`, data).then((resp) => {
       alert("更新しました");
-      setCurrentTodo(resp.data);
+      setCurrentNews(resp.data);
     });
     console.log(val);
   };
 
-  const updateTodo = () => {
+  const updateNews = () => {
     axios
-      .patch(`${apiKey}/${currentTodo.id}`, currentTodo)
-      .then((response) => {
+      .patch(`${apiKey}/${currentNews.id}`, currentNews)
+      .then(() => {
         alert("編集が完了しました");
-        navigate("/todos");
+        navigate("/news");
       })
       .catch((e) => {
         console.log(e);
       });
   };
 
-  const deleteTodo = () => {
+  const deleteNews = () => {
     const sure = window.confirm("削除しても大丈夫ですか?");
     if (sure) {
       axios
-        .delete(`${apiKey}/${currentTodo.id}`)
+        .delete(`${apiKey}/${currentNews.id}`)
         .then((resp) => {
           console.log(resp.data);
           alert("削除しました");
@@ -120,7 +119,7 @@ function EditTodo(props: any) {
               type="text"
               id="name"
               name="title"
-              value={currentTodo.title}
+              defaultValue={currentNews.title}
               onChange={handleInputChange}
             />
 
@@ -128,18 +127,18 @@ function EditTodo(props: any) {
               <span>カテゴリ</span>
               <br />
               {/* <CurrentStatus>
-                {currentTodo.is_completed ? "お知らせ" : "イベント"}
+                {currentNews.is_completed ? "お知らせ" : "イベント"}
               </CurrentStatus> */}
             </div>
           </div>
 
           <span className="m-4">
-            <Button variant="outline" color="cyan" onClick={updateTodo}>
+            <Button variant="outline" color="cyan" onClick={updateNews}>
               更新
             </Button>
           </span>
           <span className="m-4">
-            <Button variant="outline" color="cyan" onClick={deleteTodo}>
+            <Button variant="outline" color="cyan" onClick={deleteNews}>
               削除
             </Button>
           </span>
@@ -149,4 +148,4 @@ function EditTodo(props: any) {
   );
 }
 
-export default EditTodo;
+export default EditNews;

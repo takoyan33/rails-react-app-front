@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
-import { AiFillEdit } from "react-icons/ai";
-import styled from "styled-components";
+
 import { Header } from "../components/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -13,7 +11,6 @@ import { Input, Button } from "@mantine/core";
 import { Timeline, Text } from "@mantine/core";
 import { Oval } from "react-loader-spinner";
 import { Center } from "@mantine/core";
-
 
 const items = [
   { title: "トップページ", href: "/" },
@@ -28,7 +25,7 @@ const RailsPage = () => {
   const [news, setNews] = useState([]);
   const [searchName, setSearchName] = useState("");
   const { data, isLoading, isError } = usePost();
-
+  console.log("http://localhost:4000/api/v1/newss");
   useEffect(() => {
     axios
       .get("http://localhost:4000/api/v1/newss")
@@ -40,7 +37,8 @@ const RailsPage = () => {
         console.log(e);
       });
   }, []);
-
+  
+  console.log(news);
   if (isLoading)
     return (
       <div className="mt-20">
@@ -83,11 +81,9 @@ const RailsPage = () => {
 
   console.log(apiKey);
 
-
   return (
     <div className="flex">
       <Header />
-
 
       <div className="max-w-8xl my-0  m-auto mt-10">
         <p className="text-2xl font-bold">ニュース一覧</p>
