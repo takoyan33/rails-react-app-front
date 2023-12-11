@@ -32,7 +32,6 @@ const IndexPage: React.FC = () => {
   const [deleteMember] = useDeleteMemberMutation({
     refetchQueries: ["members"],
   });
-  console.log(qlapiKey);
   const [updateMember] = useUpdateMemberMutation();
   const [ID, setID] = useState("");
   const [fullname, setFullname] = useState("");
@@ -49,22 +48,19 @@ const IndexPage: React.FC = () => {
   const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
       const res = await signOut();
-
       if (res.data.success === true) {
         // サインアウト時には各Cookieを削除
         Cookies.remove("_access_token");
         Cookies.remove("_client");
         Cookies.remove("_uid");
-
         setIsSignedIn(false);
+        alert("ログアウトしました");
         navigate("/");
-
-        console.log("Succeeded in sign out");
       } else {
-        console.log("Failed in sign out");
+        alert("ログアウトに失敗しました");
       }
     } catch (err) {
-      console.log(err);
+      alert("ログアウトに失敗しました");
     }
   };
 
@@ -104,11 +100,6 @@ const IndexPage: React.FC = () => {
     <div className="flex">
       <Header />
 
-      {/* <Dark /> */}
-      {/* <p className="text-3xl font-bold m-auto w-30">
-        <img src={apizukan} className="m-auto w-40 my-6"></img>
-      </p> */}
-
       <div className="max-w-7xl m-auto mt-10">
         <h2 className="text-2xl text-center">Clubmemo</h2>
 
@@ -123,7 +114,7 @@ const IndexPage: React.FC = () => {
         )}
 
         <p className="m-6">
-          Clubmemoでは、大学の部活や中学校、高校の部員管理や情報管理を楽に行えます。
+          ClubMemoでは、大学の部活や中学校、高校の部員管理や情報管理を楽に行えます。
         </p>
         {isSignedIn && currentUser ? (
           <p className="text-center my-2">
@@ -133,6 +124,14 @@ const IndexPage: React.FC = () => {
               className="text-center m-auto"
             >
               <Link to="member/new">メンバー登録をする</Link>
+            </Button>
+            <Button
+              variant="outline"
+              color="cyan"
+              className="text-center m-auto"
+              onClick={handleSignOut}
+            >
+              ログアウト
             </Button>
           </p>
         ) : (
@@ -154,7 +153,7 @@ const IndexPage: React.FC = () => {
           </>
         )}
 
-        {members && members.length == 0 && (
+        {/* {members && members.length == 0 && (
           <Center>
             <Oval
               height={80}
@@ -169,7 +168,7 @@ const IndexPage: React.FC = () => {
               strokeWidthSecondary={2}
             />
           </Center>
-        )}
+        )} */}
 
         {isSignedIn && currentUser ? (
           <>

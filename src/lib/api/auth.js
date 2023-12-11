@@ -1,20 +1,21 @@
 import client from "./client";
 import Cookies from "js-cookie";
 // import { SignUpParams, SignInParams } from "../../components/index";
+import { rootKey } from "../../components/env";
 
 // サインアップ（新規アカウント作成）
 export const signUp = (params) => {
-  return client.post("http://localhost:4000/api/v1/auth", params);
+  return client.post(rootKey, params);
 };
 
 // サインイン（ログイン）
 export const signIn = (params) => {
-  return client.post("http://localhost:4000/api/v1/auth/sign_in", params);
+  return client.post(rootKey + "/sign_in", params);
 };
 
 // サインアウト（ログアウト）
 export const signOut = () => {
-  return client.delete("http://localhost:4000/api/v1/auth/sign_out", {
+  return client.delete(rootKey+"/sign_out", {
     headers: {
       "access-token": Cookies.get("_access_token"),
       client: Cookies.get("_client"),
