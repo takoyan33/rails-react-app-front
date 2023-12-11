@@ -26,11 +26,9 @@ const items = [
 
 function EditNews(props: any) {
   const initialNewsState = {
-    news: {
-      id: null,
-      title: "",
-      body: "",
-    },
+    id: null,
+    title: "",
+    body: "",
   };
   const [currentNews, setCurrentNews] = useState(initialNewsState);
   const [ID, setID] = useState("");
@@ -55,28 +53,36 @@ function EditNews(props: any) {
     getNews(id);
   }, []);
 
-  const handleInputChange = (event: any) => {
-    const { title, value } = event.target;
-    setCurrentNews({ ...currentNews, [title]: value });
-    //currenttodoのnameをセットする
+  const [title, setTitle] = useState(currentNews.title);
+
+  const handleInputChange = (event) => {
+    setTitle(event.target.value);
   };
 
-  const updateIsCompleted = (val: any) => {
-    var data = {
-      id: val.id,
-      title: val.title,
-      is_completed: !val.is_completed,
-    };
-    axios.patch(`${apiKey}/${val.id}`, data).then((resp) => {
-      alert("更新しました");
-      setCurrentNews(resp.data);
-    });
-    console.log(val);
-  };
+  // const updateIsCompleted = (val: any) => {
+  //   var data = {
+  //     id: val.id,
+  //     title: val.title,
+  //     is_completed: !val.is_completed,
+  //   };
+  //   axios.patch(`${apiKey}/${val.id}`, data).then((resp) => {
+  //     alert("更新しました");
+  //     setCurrentNews(resp.data);
+  //   });
+  //   console.log(val);
+  // };
 
   const updateNews = () => {
+    console.log("currentNews", currentNews);
+    console.log("currentNews.title", currentNews.title);
+    console.log("currentNews.body", currentNews.body);
     axios
-      .patch(`${apiKey}/${currentNews.id}`, currentNews)
+      .patch(`${apiKey}/${currentNews.id}`, {
+        news: {
+          title: title,
+          body: currentNews.body,
+        },
+      })
       .then(() => {
         alert("編集が完了しました");
         navigate("/news");
@@ -124,8 +130,8 @@ function EditNews(props: any) {
             />
 
             <div>
-              <span>カテゴリ</span>
-              <br />
+              {/* <span>内容</span>
+              <br /> */}
               {/* <CurrentStatus>
                 {currentNews.is_completed ? "お知らせ" : "イベント"}
               </CurrentStatus> */}

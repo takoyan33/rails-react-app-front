@@ -37,8 +37,7 @@ const RailsPage = () => {
         console.log(e);
       });
   }, []);
-  
-  console.log(news);
+
   if (isLoading)
     return (
       <div className="mt-20">
@@ -124,14 +123,10 @@ const RailsPage = () => {
                 <div className="my-4" key={val.id}>
                   <Timeline active={1} bulletSize={24} lineWidth={2}>
                     <Timeline.Item title="">
-                      {val.title}
-                      <Text color="dimmed" size="sm">
-                        <Link to={val.id + "/edit"} component={<EditTodo />}>
-                          <Text variant="link" component="span" inherit>
-                            詳しくはこちら
-                          </Text>
-                        </Link>
-                      </Text>
+                      <Link to={val.id + "/edit"} component={<EditTodo />}>
+                        {val.title}
+                      </Link>
+                      <Text color="dimmed" size="sm"></Text>
                       {val.body}
                       <Text size="xs" mt={4}>
                         {val.created_at}
