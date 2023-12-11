@@ -1,16 +1,19 @@
 import React, { useState, useContext } from "react";
 import Cookies from "js-cookie";
-import { Header } from "../components/Header";
+import { Header } from "../../components/Header";
 import { Link, Router } from "react-router-dom";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
-import { useMembersQuery, useCreateMemberMutation } from "../graphql/generated";
+import {
+  useMembersQuery,
+  useCreateMemberMutation,
+} from "../../graphql/generated";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input, Button } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
 import { CiAt } from "react-icons/ci";
-import { AuthContext } from "../Routes";
-import { signIn } from "../lib/api/auth";
+import { AuthContext } from "../../Routes";
+import { signIn } from "../../lib/api/auth";
 
 const items = [
   { title: "トップページ", href: "/" },
@@ -28,22 +31,17 @@ function AddClub() {
   });
   const { data: { members = [] } = {} } = useMembersQuery();
   console.log(members);
-  const [fullname, setFullname] = useState("");
-  const [hurigana, setHurigana] = useState("");
-  const [grade, setGrade] = useState("");
-  const [gender, setGender] = useState("");
-  const [department, setDepartment] = useState("");
-  const [birthday, setBirthday] = useState("");
   const [admin, setAdmin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
+    setIsLoading(true);
     const params = {
       email: email,
       password: password,
@@ -58,15 +56,16 @@ function AddClub() {
         Cookies.set("_access_token", res.headers["access-token"]);
         Cookies.set("_client", res.headers["client"]);
         Cookies.set("_uid", res.headers["uid"]);
+        setIsLoading(false);
         setCurrentUser(res.data.data);
-        console.log("Signed in successfully!");
+        alert("ログインに成功しました");
         setIsSignedIn(true);
         navigate("/");
       } else {
         setAlertMessageOpen(true);
       }
     } catch (err) {
-      console.log(err);
+      alert("ログインに失敗しました");
       setAlertMessageOpen(true);
     }
   };
@@ -80,6 +79,12 @@ function AddClub() {
         <div className="my-4">
           <Breadcrumbs>{items}</Breadcrumbs>
         </div>
+
+        {isLoading && (
+          <div className="my-4 text-center m-auto">
+            <p>処理中はしばらくお待ちください...</p>
+          </div>
+        )}
 
         <div className="my-4">
           <Input.Wrapper

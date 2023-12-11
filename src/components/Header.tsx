@@ -98,19 +98,16 @@ export const Header = () => {
   const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
       const res = await signOut();
-
       if (res.data.success === true) {
         // サインアウト時には各Cookieを削除
         Cookies.remove("_access_token");
         Cookies.remove("_client");
         Cookies.remove("_uid");
-
+        alert("ログアウトに成功しました");
         setIsSignedIn(false);
         navigate("/");
-
-        console.log("Succeeded in sign out");
       } else {
-        console.log("Failed in sign out");
+        alert("ログアウトに失敗しました");
       }
     } catch (err) {
       console.log(err);

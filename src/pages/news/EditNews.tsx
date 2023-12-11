@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { Header } from "../components/Header";
+import { Header } from "../../components/Header";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
-import { apiKey } from "../components/env";
+import { apiKey } from "../../components/env";
 import { Breadcrumbs, Anchor } from "@mantine/core";
 import { Link, Router } from "react-router-dom";
 import { Input, Button } from "@mantine/core";

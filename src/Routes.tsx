@@ -7,20 +7,20 @@ import { User } from "./interfaces/index";
 
 import IndexPage from "./pages/IndexPage";
 import QiitaPage from "./pages/QiitaPage";
-import RailsPage from "./pages/RailsPage";
+import RailsPage from "./pages/news/RailsPage";
 import QiitapracticePage from "./pages/QiitapracticePage";
-import EditTodo from "./pages/EditNews";
-import AddTodo from "./pages/AddNews";
+import EditTodo from "./pages/news/EditNews";
+import AddTodo from "./pages/news/AddNews";
 import Error from "./components/Error";
 import Dark from "./components/Darkmode";
 import Resas from "./pages/ResasPage";
 import AddPost from "./pages/_AddPost";
-import AddMember from "./pages/AddMember";
+import AddMember from "./pages/club/AddMember";
 import AboutPage from "./pages/AboutPage";
-import AddClub from "./pages/AddClub";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import ClubIndex from "./pages/ClubIndex";
+import AddClub from "./pages/club/AddClub";
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
+import ClubIndex from "./pages/club/ClubIndex";
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext(

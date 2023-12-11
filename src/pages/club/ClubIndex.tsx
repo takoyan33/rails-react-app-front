@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { Header } from "../components/Header";
+import { Header } from "../../components/Header";
 import { Link, Router } from "react-router-dom";
 import { FiSend } from "react-icons/fi";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
-import { useMembersQuery, useCreateMemberMutation } from "../graphql/generated";
+import {
+  useMembersQuery,
+  useCreateMemberMutation,
+} from "../../graphql/generated";
 import TextField from "@mui/material/TextField";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

@@ -9,7 +9,7 @@ const Home: React.FC = () => {
     <>
       {isSignedIn && currentUser ? (
         <>
-          <h1>Signed in successfully!</h1>
+          <h1>ログイン中</h1>
           <h2>Email: {currentUser?.email}</h2>
           <h2>Name: {currentUser?.name}</h2>
         </>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import { Header } from "../components/Header";
+import { Header } from "../../components/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import EditTodo from "./EditNews";
-import { usePost } from "./fetch/usePost";
-import { apiKey } from "../components/env";
+import { usePost } from "../fetch/usePost";
+import { apiKey } from "../../components/env";
 import { Breadcrumbs, Anchor } from "@mantine/core";
 import { Input, Button } from "@mantine/core";
 import { Timeline, Text } from "@mantine/core";

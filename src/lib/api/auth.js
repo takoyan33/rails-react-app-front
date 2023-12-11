@@ -15,7 +15,7 @@ export const signIn = (params) => {
 
 // サインアウト（ログアウト）
 export const signOut = () => {
-  return client.delete(rootKey+"/sign_out", {
+  return client.delete(rootKey + "/sign_out", {
     headers: {
       "access-token": Cookies.get("_access_token"),
       client: Cookies.get("_client"),
@@ -32,7 +32,7 @@ export const getCurrentUser = () => {
     !Cookies.get("_uid")
   )
     return;
-  return client.get("/http://localhost:4000/api/v1/auth/sessions", {
+  return client.get(rootKey + "/sessions", {
     headers: {
       "access-token": Cookies.get("_access_token"),
       client: Cookies.get("_client"),

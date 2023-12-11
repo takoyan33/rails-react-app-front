@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { Header } from "../components/Header";
+import { Header } from "../../components/Header";
 import { Link, Router } from "react-router-dom";
 import { FiSend } from "react-icons/fi";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
-import { useMembersQuery, useCreateMemberMutation } from "../graphql/generated";
+import {
+  useMembersQuery,
+  useCreateMemberMutation,
+} from "../../graphql/generated";
 import TextField from "@mui/material/TextField";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,7 +31,7 @@ const items = [
   </Anchor>
 ));
 
-function AddMember() {
+function AddClub() {
   const notify = () => toast("メンバー登録できました！");
   const [createMember] = useCreateMemberMutation({
     refetchQueries: ["members"],
@@ -49,7 +52,7 @@ function AddMember() {
       <Header />
       <ToastContainer />
       <div className="max-w-6xl m-auto mt-12">
-        <p className="text-3xl font-bold">新しいメンバー登録</p>
+        <p className="text-3xl font-bold">クラブの登録</p>
         <div className="my-4">
           <Breadcrumbs>{items}</Breadcrumbs>
         </div>
@@ -74,13 +77,13 @@ function AddMember() {
           <Input.Wrapper
             id="input-demo"
             withAsterisk
-            label="ふりがな"
+            label="種類"
             description=""
             error=""
           >
             <Input
               icon={<CiAt />}
-              placeholder="ふりがな"
+              placeholder="AddClub"
               value={hurigana}
               onChange={(e) => setHurigana(e.target.value)}
             />
@@ -106,13 +109,13 @@ function AddMember() {
           <Input.Wrapper
             id="input-demo"
             withAsterisk
-            label="性別"
+            label="概要"
             description=""
             error=""
           >
             <Input
               icon={<CiUser />}
-              placeholder="性別"
+              placeholder="概要"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             />
@@ -122,13 +125,29 @@ function AddMember() {
           <Input.Wrapper
             id="input-demo"
             withAsterisk
-            label="学部"
+            label="顧問の先生"
+            description=""
+            error=""
+          >
+            <Input
+              icon={<CiUser />}
+              placeholder="顧問の先生"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            />
+          </Input.Wrapper>
+        </div>
+        <div className="my-4">
+          <Input.Wrapper
+            id="input-demo"
+            withAsterisk
+            label="活動日"
             description=""
             error=""
           >
             <Input
               icon={<CiHome />}
-              placeholder="学部"
+              placeholder="活動日"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
             />
@@ -138,13 +157,13 @@ function AddMember() {
           <Input.Wrapper
             id="input-demo"
             withAsterisk
-            label="誕生日"
+            label="設立年"
             description=""
             error=""
           >
             <Input
               icon={<CiCalendarDate />}
-              placeholder="誕生日"
+              placeholder="設立年"
               type="date"
               value={birthday}
               onChange={(e) => setBirthday(e.target.value)}
@@ -180,7 +199,7 @@ function AddMember() {
               navigate("/");
             }}
           >
-            保存
+            登録する
           </Button>
         </div>
       </div>
@@ -188,4 +207,4 @@ function AddMember() {
   );
 }
 
-export default AddMember;
+export default AddClub;

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Header } from "../components/Header";
+import { Header } from "../../components/Header";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,8 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Input, Button } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
 import { CiCalendarDate } from "react-icons/ci";
-import { AuthContext } from "../Routes";
-import { signUp } from "../lib/api/auth";
+import { AuthContext } from "../../Routes";
+import { signUp } from "../../lib/api/auth";
 import Cookies from "js-cookie";
 
 const items = [
@@ -31,10 +31,11 @@ function AddClub() {
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
+    setIsLoading(true);
     const params = {
       name: name,
       email: email,
@@ -55,14 +56,19 @@ function AddClub() {
 
         setIsSignedIn(true);
         setCurrentUser(res.data.data);
-        navigate("/");
-
+        setIsLoading(false);
         console.log("Signed in successfully!");
+        alert("新規登録に成功しました");
+        navigate("/");
       } else {
         setAlertMessageOpen(true);
+        alert("新規登録に失敗しました");
+        setIsLoading(false);
       }
     } catch (err) {
       console.log(err);
+      alert("新規登録に失敗しました");
+      setIsLoading(false);
       setAlertMessageOpen(true);
     }
   };
@@ -76,6 +82,11 @@ function AddClub() {
         <div className="my-4">
           <Breadcrumbs>{items}</Breadcrumbs>
         </div>
+        {isLoading && (
+          <div className="my-4 text-center m-auto">
+            <p>処理中はしばらくお待ちください...</p>
+          </div>
+        )}
 
         <div className="my-4">
           <Input.Wrapper
