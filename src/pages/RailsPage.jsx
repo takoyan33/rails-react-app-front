@@ -25,10 +25,9 @@ const RailsPage = () => {
   const [news, setNews] = useState([]);
   const [searchName, setSearchName] = useState("");
   const { data, isLoading, isError } = usePost();
-  console.log("http://localhost:4000/api/v1/newss");
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/v1/newss")
+      .get(apiKey)
       .then((resp) => {
         setNews(resp.data);
         console.log(news);
