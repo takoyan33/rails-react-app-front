@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import React, { useState, useEffect, createContext } from "react";
 import CommonLayout from "./components/CommonLayout";
 import Home from "./pages/Home";
@@ -6,21 +6,22 @@ import { getCurrentUser } from "./lib/api/auth";
 import { User } from "./interfaces/index";
 
 import IndexPage from "./pages/IndexPage";
-import QiitaPage from "./pages/QiitaPage";
+import QiitaPage from "./pages/api/QiitaPage";
 import RailsPage from "./pages/news/RailsPage";
-import QiitapracticePage from "./pages/QiitapracticePage";
+import QiitapracticePage from "./pages/api/QiitapracticePage";
 import EditTodo from "./pages/news/EditNews";
 import AddTodo from "./pages/news/AddNews";
 import Error from "./components/Error";
 import Dark from "./components/Darkmode";
-import Resas from "./pages/ResasPage";
+import Resas from "./pages/api/ResasPage";
 import AddPost from "./pages/_AddPost";
-import AddMember from "./pages/club/AddMember";
+import AddMember from "./pages/member/AddMember";
 import AboutPage from "./pages/AboutPage";
 import AddClub from "./pages/club/AddClub";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ClubIndex from "./pages/club/ClubIndex";
+import Profile from "./pages/profile/Profile";
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext(
@@ -44,11 +45,10 @@ const Routers = () => {
   const handleGetCurrentUser = async () => {
     try {
       const res = await getCurrentUser();
-
+      console.log("res", res);
       if (res?.data.isLogin === true) {
         setIsSignedIn(true);
         setCurrentUser(res?.data.data);
-
         console.log(res?.data.data);
       } else {
         console.log("No current user");
@@ -63,20 +63,6 @@ const Routers = () => {
   useEffect(() => {
     handleGetCurrentUser();
   }, [setCurrentUser]);
-
-  // ユーザーが認証済みかどうかでルーティングを決定
-  // 未認証だった場合は「/signin」ページに促す
-  const Private = ({ children }: { children: React.ReactElement }) => {
-    if (!loading) {
-      if (isSignedIn) {
-        return children;
-      } else {
-        // return <Redirect to="/signin" />;
-      }
-    } else {
-      return <></>;
-    }
-  };
 
   return (
     <BrowserRouter>
@@ -108,6 +94,7 @@ const Routers = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/club" element={<ClubIndex />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </AuthContext.Provider>
     </BrowserRouter>

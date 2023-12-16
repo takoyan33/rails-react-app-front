@@ -30,13 +30,21 @@ export const getCurrentUser = () => {
     !Cookies.get("_access_token") ||
     !Cookies.get("_client") ||
     !Cookies.get("_uid")
-  )
+  ) {
+    console.error("Required cookies are missing.");
+    return; // ここで処理を中断するか、適切なエラー処理を行う
+  }
+
+  if (!client) {
+    console.error("Client is not defined."); // clientが未定義の場合のエラー処理
     return;
+  }
+
   return client.get(rootKey + "/sessions", {
     headers: {
       "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
+      "client": Cookies.get("_client"),
+      "uid": Cookies.get("_uid"),
     },
   });
 };

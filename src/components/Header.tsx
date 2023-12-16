@@ -19,6 +19,8 @@ import {
   AiFillEdit,
   AiFillQuestionCircle,
   AiFillInfoCircle,
+  AiFillStop,
+  AiFillSmile,
 } from "react-icons/ai";
 import { signOut } from "../lib/api/auth";
 
@@ -144,6 +146,17 @@ export const Header = () => {
                 </Link>
               </Tooltip>
               <Tooltip
+                label="プロフィール"
+                position="right"
+                transitionDuration={0}
+              >
+                <Link to={"/profile"}>
+                  <UnstyledButton className={cx(classes.link)}>
+                    <AiFillSmile />
+                  </UnstyledButton>
+                </Link>
+              </Tooltip>
+              <Tooltip
                 label="ログアウト"
                 position="right"
                 transitionDuration={0}
@@ -152,7 +165,7 @@ export const Header = () => {
                   onClick={handleSignOut}
                   className={cx(classes.link)}
                 >
-                  <AiFillEdit />
+                  <AiFillStop />
                 </UnstyledButton>
               </Tooltip>
             </>

@@ -1,7 +1,7 @@
 import React from "react";
-import { practiceqiita } from "../hooks/practiceqiita";
-import { Qiitapracticelist } from "../components/Qiitapracticelist";
-import { Header } from "../components/Header";
+import { practiceqiita } from "../../hooks/practiceqiita";
+import { Qiitapracticelist } from "../../components/Qiitapracticelist";
+import { Header } from "../../components/Header";
 
 const QiitapracticePage: React.FC = () => {
   const { articles, errorMessage, isLoading, fetchArticles } = practiceqiita();

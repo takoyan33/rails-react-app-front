@@ -11,7 +11,7 @@ import {
 } from "@apollo/client";
 
 const link = createHttpLink({
-  uri: qlapiKey,
+  uri: "http://localhost:4000/graphql",
   credentials: "include",
 });
 
