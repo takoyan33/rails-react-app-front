@@ -4,10 +4,10 @@ import CommonLayout from "./components/CommonLayout";
 import Home from "./pages/Home";
 import { getCurrentUser } from "./lib/api/auth";
 import { User } from "./interfaces/index";
-
+import TopPage from "./pages/TopPage";
 import IndexPage from "./pages/IndexPage";
 import QiitaPage from "./pages/api/QiitaPage";
-import RailsPage from "./pages/news/RailsPage";
+import IndexNews from "./pages/news/IndexNews";
 import QiitapracticePage from "./pages/api/QiitapracticePage";
 import EditTodo from "./pages/news/EditNews";
 import AddTodo from "./pages/news/AddNews";
@@ -51,7 +51,7 @@ const Routers = () => {
         setCurrentUser(res?.data.data);
         console.log(res?.data.data);
       } else {
-        console.log("No current user");
+        console.log("ログインユーザーはいません");
       }
     } catch (err) {
       console.log(err);
@@ -79,8 +79,9 @@ const Routers = () => {
         <Routes>
           <Route path="/" element={<IndexPage />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/top" element={<TopPage />} />
           <Route path="/qiita" element={<QiitaPage />} />
-          <Route path="/news" element={<RailsPage />} />
+          <Route path="/news" element={<IndexNews />} />
           <Route path="/news/:id/edit" element={<EditTodo />} />
           <Route path="/club/new" element={<AddClub />} />
           <Route path="/member/new" element={<AddMember />} />

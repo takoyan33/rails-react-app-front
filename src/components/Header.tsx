@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useState, useEffect, createContext } from "react";
 import { AuthContext } from "../Routes";
 import {
   Navbar,
@@ -58,10 +58,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const mockdata = [
-  { icon: <AiFillHome />, label: "TOP", href: "/" },
+  { icon: <AiFillHome />, label: "TOP", href: "/top" },
   { icon: <AiFillFile />, label: "ニュース", href: "/news" },
   { icon: <AiFillQuestionCircle />, label: "About", href: "/about" },
-  { icon: <AiFillInfoCircle />, label: "サークルについて", href: "/club" },
+  // { icon: <AiFillInfoCircle />, label: "サークルについて", href: "/club" },
   // { icon: <AiFillFile />, label: "新規登録", href: "/register" },
   // { icon: <AiFillHome />, label: "ログイン", href: "/login" },
 ];
@@ -93,24 +93,18 @@ function NavbarLink({ icon, label, active, onClick, href }: NavbarLinkProps) {
 
 export const Header = () => {
   const { classes, cx } = useStyles();
-  const { isSignedIn, currentUser } = useContext(AuthContext);
+  // const { isSignedIn, currentUser } = useContext(AuthContext);
   const [active, setActive] = useState(2);
   const navigate = useNavigate();
   const { loading, setIsSignedIn } = useContext(AuthContext);
-  const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSignOut = (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
-      const res = await signOut();
-      if (res.data.success === true) {
-        // サインアウト時には各Cookieを削除
-        Cookies.remove("_access_token");
-        Cookies.remove("_client");
-        Cookies.remove("_uid");
-        alert("ログアウトに成功しました");
-        setIsSignedIn(false);
-        navigate("/");
-      } else {
-        alert("ログアウトに失敗しました");
-      }
+      Cookies.remove("_access_token");
+      Cookies.remove("_client");
+      Cookies.remove("_uid");
+      alert("ログアウトに成功しました");
+      navigate("/");
+      setIsSignedIn(false);
     } catch (err) {
       console.log(err);
     }
@@ -125,6 +119,15 @@ export const Header = () => {
     />
   ));
 
+  const [hasCookies, setHasCookies] = useState(false);
+
+  useEffect(() => {
+    const accessToken = Cookies.get("_access_token");
+    if (accessToken) {
+      setHasCookies(true);
+    }
+  }, []);
+
   return (
     <>
       <Navbar height={1200} width={{ base: 80 }} p="md">
@@ -132,7 +135,7 @@ export const Header = () => {
           <Stack justify="center" spacing={0}>
             {links}
           </Stack>
-          {isSignedIn && (
+          {hasCookies && (
             <>
               <Tooltip
                 label="メンバー登録"
@@ -151,6 +154,17 @@ export const Header = () => {
                 transitionDuration={0}
               >
                 <Link to={"/profile"}>
+                  <UnstyledButton className={cx(classes.link)}>
+                    <AiFillSmile />
+                  </UnstyledButton>
+                </Link>
+              </Tooltip>
+              <Tooltip
+                label="サークルについて"
+                position="right"
+                transitionDuration={0}
+              >
+                <Link to={"/club"}>
                   <UnstyledButton className={cx(classes.link)}>
                     <AiFillSmile />
                   </UnstyledButton>

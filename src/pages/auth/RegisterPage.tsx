@@ -59,7 +59,7 @@ function AddClub() {
         setIsLoading(false);
         console.log("Signed in successfully!");
         alert("新規登録に成功しました");
-        navigate("/");
+        navigate("/top");
       } else {
         setAlertMessageOpen(true);
         alert("新規登録に失敗しました");

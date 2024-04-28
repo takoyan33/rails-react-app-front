@@ -15,15 +15,10 @@ export const signIn = (params) => {
 
 // サインアウト（ログアウト）
 export const signOut = () => {
-  return client.delete(rootKey + "/sign_out", {
-    headers: {
-      "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
-    },
-  });
+  Cookies.remove("_access_token");
+  Cookies.remove("_client");
+  Cookies.remove("_uid");
 };
-
 // 認証済みのユーザーを取得
 export const getCurrentUser = () => {
   if (
@@ -43,8 +38,8 @@ export const getCurrentUser = () => {
   return client.get(rootKey + "/sessions", {
     headers: {
       "access-token": Cookies.get("_access_token"),
-      "client": Cookies.get("_client"),
-      "uid": Cookies.get("_uid"),
+      client: Cookies.get("_client"),
+      uid: Cookies.get("_uid"),
     },
   });
 };

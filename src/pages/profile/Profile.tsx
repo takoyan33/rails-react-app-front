@@ -2,10 +2,8 @@ import React, { useState, useContext } from "react";
 import { Header } from "../../components/Header";
 import { AuthContext } from "../../Routes";
 
-
-
 function Profile(props: any) {
-const { isSignedIn, currentUser } = useContext(AuthContext);
+  const { isSignedIn, currentUser } = useContext(AuthContext);
 
   return (
     <div className="flex">
@@ -20,7 +18,7 @@ const { isSignedIn, currentUser } = useContext(AuthContext);
             <h2>Name: {currentUser?.name}</h2>
           </>
         ) : (
-          <h1>Not signed in</h1>
+          <h1>ログインしていません</h1>
         )}
       </div>
     </div>

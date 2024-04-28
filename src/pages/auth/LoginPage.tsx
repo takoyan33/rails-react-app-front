@@ -58,7 +58,7 @@ function AddClub() {
         setCurrentUser(res.data.data);
         alert("ログインに成功しました");
         setIsSignedIn(true);
-        navigate("/");
+        navigate("/top");
       } else {
         setIsLoading(false);
         setAlertMessageOpen(true);

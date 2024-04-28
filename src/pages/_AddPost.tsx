@@ -19,10 +19,10 @@ import TextField from "@mui/material/TextField";
 function AddPost(props: any) {
   const notify = () => toast("記事投稿ができました！");
   const { data: { books = [] } = {} } = useBooksQuery();
-  const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
-  const [createMember] = useCreateMemberMutation({
-    refetchQueries: ["members"],
-  });
+  // const [createBook] = useCreateBookMutation({ refetchQueries: ["books"] });
+  // const [createMember] = useCreateMemberMutation({
+  //   refetchQueries: ["members"],
+  // });
   const [title, setTitle] = useState("");
   const [fullname, setFullname] = useState("");
   const [hurigana, setHurigana] = useState("");
@@ -69,24 +69,24 @@ function AddPost(props: any) {
         <div>
           <Button
             variant="outlined"
-            onClick={() => {
-              createMember({
-                variables: {
-                  params: {
-                    profilepic: "aa",
-                    fullname: fullname,
-                    hurigana: hurigana,
-                    department: department,
-                    grade: fullname,
-                    gender: gender,
-                    birthday: birthday,
-                    admin: admin,
-                  },
-                },
-              });
-              notify();
-              setTitle("");
-            }}
+            // onClick={() => {
+            //   createMember({
+            //     variables: {
+            //       params: {
+            //         profilepic: "aa",
+            //         fullname: fullname,
+            //         hurigana: hurigana,
+            //         department: department,
+            //         grade: fullname,
+            //         gender: gender,
+            //         birthday: birthday,
+            //         admin: admin,
+            //       },
+            //     },
+            //   });
+            //   notify();
+            //   setTitle("");
+            // }}
           >
             保存
           </Button>

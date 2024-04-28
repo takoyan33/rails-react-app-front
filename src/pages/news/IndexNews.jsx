@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { Header } from "../../components/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -11,6 +10,7 @@ import { Input, Button } from "@mantine/core";
 import { Timeline, Text } from "@mantine/core";
 import { Oval } from "react-loader-spinner";
 import { Center } from "@mantine/core";
+import Cookies from "js-cookie";
 
 const items = [
   { title: "トップページ", href: "/" },
@@ -35,6 +35,15 @@ const RailsPage = () => {
       .catch((e) => {
         console.log(e);
       });
+  }, []);
+
+  const [hasCookies, setHasCookies] = useState(false);
+
+  useEffect(() => {
+    const accessToken = Cookies.get("_access_token");
+    if (accessToken) {
+      setHasCookies(true);
+    }
   }, []);
 
   if (isLoading)
@@ -77,8 +86,6 @@ const RailsPage = () => {
     }
   };
 
-  console.log(apiKey);
-
   return (
     <div className="flex">
       <Header />
@@ -89,9 +96,16 @@ const RailsPage = () => {
           <Breadcrumbs>{items}</Breadcrumbs>
         </div>
 
-        <Button variant="outline" color="cyan">
-          <Link to="/news/new">ニュースを作成する</Link>
-        </Button>
+        {hasCookies ? (
+          <>
+            <Button variant="outline" color="cyan">
+              <Link to="/news/new">ニュースを作成する</Link>
+            </Button>
+          </>
+        ) : (
+          <></>
+        )}
+
         <div className="my-4">
           <Input
             type="search"
