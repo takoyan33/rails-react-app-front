@@ -129,7 +129,7 @@ const IndexPage: React.FC = () => {
               color="cyan"
               className="text-center m-auto"
             >
-              <Link to="member/new">メンバー登録をする</Link>
+              <Link to="/member/new">メンバー登録をする</Link>
             </Button>
           </p>
         ) : (

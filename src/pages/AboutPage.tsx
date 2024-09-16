@@ -1,13 +1,5 @@
-import React, { useState } from "react";
-import axios from "axios";
-import styled from "styled-components";
 import { Header } from "../components/Header";
-import { FiSend } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import useSWR from "swr";
 import { ToastContainer, toast } from "react-toastify";
-import { apiKey } from "../components/env";
-import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 
 function AboutPage(props: any) {
   return (

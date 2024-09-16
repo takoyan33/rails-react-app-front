@@ -1,4 +1,3 @@
-import { Card, Image, Text, Checkbox, Input, Button } from "@mantine/core";
 import "antd/dist/antd.css";
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";

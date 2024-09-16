@@ -60,11 +60,11 @@ const IndexPage: React.FC = () => {
               color="cyan"
               className="text-center m-auto"
             >
-              <Link to="member/new">メンバー登録をする</Link>
+              <Link to="/member/new">メンバー登録をする</Link>
             </Button>
           </p>
         ) : (
-          <div className="flex m-auto">
+          <div className="flex w-100 justify-center m-auto">
             <div className="my-2 mx-2 text-center">
               <Link to="/register">
                 <Button variant="outline" color="cyan">
